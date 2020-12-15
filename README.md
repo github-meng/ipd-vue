@@ -1,4 +1,4 @@
-# dc-ipd-vue
+# ipd-vue
 
 ## Project setup
 ```
