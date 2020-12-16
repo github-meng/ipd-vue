@@ -32,6 +32,7 @@ const routes = [
   },
   {
     path: "/",
+    showInMenu: true,
     component: () =>
       import(
         /* webpackChunkName: "basicLayout" */ "../layouts/BasicLayout.vue"
@@ -40,51 +41,71 @@ const routes = [
       // 重定向-首页
       {
         path: "/",
-        redirect: "/dashboard/analysis"
+        redirect: "/home"
       },
-      // dashboard
+      // home
       {
-        path: "/dashboard",
-        name: "dashboard",
-        component: { render: h => h("router-view") },
-        children: [
-          {
-            path: "/dashboard",
-            redirect: "/dashboard/analysis"
-          },
-          {
-            path: "/dashboard/analysis",
-            name: "analysis",
-            component: () =>
-              import(
-                /* webpackChunkName: "dashboard" */ "../views/dashboard/Analysis.vue"
-              )
-          }
-        ]
+        path: "/home",
+        name: "项目管理",
+        meta: { icon: "project" },
+        component: () =>
+          import(/* webpackChunkName: "dashboard" */ "../views/home/Home.vue")
       },
-      // tasks
+      // workbench
       {
-        path: "/tasks",
-        name: "tasks",
-        component: { render: h => h("router-view") },
-        children: [
-          {
-            path: "/tasks",
-            redirect: "/tasks/task1"
-          },
-          {
-            path: "/tasks/task1",
-            name: "task1",
-            component: () =>
-              import(/* webpackChunkName: "tasks" */ "../views/tasks/Task1.vue")
-          },
-          {
-            path: "/tasks/task2",
-            name: "task2",
-            component: () =>
-              import(/* webpackChunkName: "tasks" */ "../views/tasks/Task2.vue")
-          }
-        ]
+        path: "/workbench",
+        name: "工作台",
+        meta: { icon: "profile" },
+        component: () =>
+          import(
+            /* webpackChunkName: "tasks" */ "../views/workbench/Workbench.vue"
+          )
+      },
+      // process
+      {
+        path: "/process",
+        name: "新建项目",
+        meta: { icon: "plus-square" },
+        component: () =>
+          import(
+            /* webpackChunkName: "tasks" */ "../views/process/AddProcess.vue"
+          )
+      },
+      // repository
+      {
+        path: "/repository",
+        name: "知识库",
+        meta: { icon: "wallet" },
+        component: () =>
+          import(
+            /* webpackChunkName: "tasks" */ "../views/repository/Repository.vue"
+          )
+      },
+      // settings
+      {
+        path: "/settings",
+        name: "设置",
+        meta: { icon: "setting" },
+        component: () =>
+          import(
+            /* webpackChunkName: "tasks" */ "../views/settings/Settings.vue"
+          )
+      },
+      // usersInfo
+      {
+        path: "/usersInfo",
+        name: "用户管理",
+        meta: { icon: "team" },
+        component: () =>
+          import(/* webpackChunkName: "tasks" */ "../views/users/UsersInfo.vue")
+      },
+      // help
+      {
+        path: "/help",
+        name: "帮助",
+        meta: { icon: "question-circle" },
+        component: () =>
+          import(/* webpackChunkName: "tasks" */ "../views/help/Help.vue")
       }
     ]
   },

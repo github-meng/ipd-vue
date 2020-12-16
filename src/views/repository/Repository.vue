@@ -1,5 +1,5 @@
 <template>
-  <div>task2</div>
+  <div>知识库</div>
 </template>
 
 <script>

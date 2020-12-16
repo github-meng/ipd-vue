@@ -1,33 +1,49 @@
 <template>
   <div>
-    <a-menu
-      :default-selected-keys="['1']"
-      mode="inline"
-      theme="dark"
-      :inlineCollapsed="collapsed"
-    >
-      <a-menu-item key="1" title="第一部分">
-        <a-icon type="pie-chart" />
-        <p>看板</p>
-      </a-menu-item>
-      <a-menu-item key="2" title="第二部分">
-        <a-icon type="desktop" />
-        <p>工作台</p>
-      </a-menu-item>
-      <a-menu-item key="3" title="第三部分">
-        <a-icon type="inbox" />
-        <p>任务</p>
+    <a-menu :default-selected-keys="selectKeys" mode="inline" theme="dark">
+      <a-menu-item
+        v-for="item in menuData"
+        :key="item.path"
+        title=""
+        @click="handelClickLink"
+      >
+        <a-icon :type="item.meta.icon" />
+        <p>{{ item.name }}</p>
       </a-menu-item>
     </a-menu>
   </div>
 </template>
 
 <script>
+import router from "../router";
 export default {
   data() {
+    this.selectKeysMap = {};
+    const menuData = this.getMenuData(this.$router.options.routes);
     return {
-      collapsed: false
+      menuData,
+      selectKeys: this.selectKeysMap[this.$route.path]
     };
+  },
+  methods: {
+    handelClickLink(item) {
+      router.push(item.key);
+    },
+    getMenuData(routes, selectKey) {
+      const finalMenuData = [];
+      routes.forEach(item => {
+        if (item.showInMenu) {
+          item.children.forEach(menu => {
+            if (menu.name) {
+              this.selectKeysMap[menu.path] = [menu.path || selectKey];
+              const newMenu = { ...menu };
+              finalMenuData.push(newMenu);
+            }
+          });
+        }
+      });
+      return finalMenuData;
+    }
   }
 };
 </script>
