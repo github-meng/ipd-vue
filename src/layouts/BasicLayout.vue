@@ -1,33 +1,35 @@
 <template>
-  <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
-      <div class="logo">
-        <a href="/">
-          <img src="../assets/ipd-logo.png" alt="logo" />
-          <h1>流程系统</h1>
-        </a>
-      </div>
-      <SiderMenu />
-    </a-layout-sider>
-    <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <!-- <a-icon
+  <div>
+    <a-layout id="components-layout-demo-side" style="min-height: 100vh">
+      <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
+        <div class="logo">
+          <a href="/">
+            <img src="../assets/ipd-logo.png" alt="logo" />
+            <h1>流程系统</h1>
+          </a>
+        </div>
+        <SiderMenu />
+      </a-layout-sider>
+      <a-layout>
+        <a-layout-header class="layout-header">
+          <!-- <a-icon
           class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="() => (collapsed = !collapsed)"
         /> -->
-        <Header />
-      </a-layout-header>
-      <a-layout-content style="margin: 0 16px">
-        <transition>
-          <router-view></router-view>
-        </transition>
-      </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        <Footer />
-      </a-layout-footer>
+          <Header />
+        </a-layout-header>
+        <a-layout-content style="margin: 0 16px">
+          <transition>
+            <router-view></router-view>
+          </transition>
+        </a-layout-content>
+        <a-layout-footer style="text-align: center">
+          <Footer />
+        </a-layout-footer>
+      </a-layout>
     </a-layout>
-  </a-layout>
+  </div>
 </template>
 
 <script>
@@ -50,6 +52,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.layout-header {
+  background: #fff;
+  padding: 0;
+  height: 48px;
+  line-height: 48px;
+}
 .logo {
   a {
     display: flex;
@@ -59,9 +67,9 @@ export default {
     overflow: hidden;
     img {
       display: inline;
-      width: 50px;
-      height: 50px;
-      margin: 7px;
+      width: 48px;
+      height: 48px;
+      margin: 0;
     }
     h1 {
       font-size: 14px;
