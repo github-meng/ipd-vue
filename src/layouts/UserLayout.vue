@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>layouts布局</div>
     <router-view></router-view>
   </div>
 </template>

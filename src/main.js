@@ -13,7 +13,13 @@ import {
   Badge,
   Drawer,
   Mentions,
-  Tabs
+  Tabs,
+  Form,
+  Input,
+  Checkbox,
+  Select,
+  Row,
+  Col
 } from "ant-design-vue";
 
 Vue.use(Button);
@@ -27,6 +33,12 @@ Vue.use(Badge);
 Vue.use(Drawer);
 Vue.use(Mentions);
 Vue.use(Tabs);
+Vue.use(Form);
+Vue.use(Input);
+Vue.use(Checkbox);
+Vue.use(Select);
+Vue.use(Row);
+Vue.use(Col);
 Vue.config.productionTip = false;
 
 new Vue({
