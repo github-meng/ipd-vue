@@ -6,10 +6,12 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "mock": "vue-cli-service serve --mode mock"
   },
   "dependencies": {
     "ant-design-vue": "^1.7.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
     "nprogress": "^0.2.0",
@@ -34,6 +36,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.5.0",
+    "mockjs": "^1.1.0",
     "prettier": "^1.19.1",
     "vue-template-compiler": "^2.6.11"
   },
