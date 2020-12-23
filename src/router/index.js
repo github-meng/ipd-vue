@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
 import NoFound from "../views/404.vue";
+import { getToken } from "@/cookies/cookie";
 
 Vue.use(VueRouter);
 
@@ -47,7 +48,7 @@ const routes = [
       {
         path: "/home",
         name: "项目管理",
-        meta: { icon: "project" },
+        meta: { icon: "project", needLogin: true },
         component: () =>
           import(/* webpackChunkName: "dashboard" */ "../views/home/Home.vue")
       },
@@ -55,7 +56,7 @@ const routes = [
       {
         path: "/workbench",
         name: "工作台",
-        meta: { icon: "profile" },
+        meta: { icon: "profile", needLogin: true },
         component: () =>
           import(
             /* webpackChunkName: "tasks" */ "../views/workbench/Workbench.vue"
@@ -65,7 +66,7 @@ const routes = [
       {
         path: "/process",
         name: "新建项目",
-        meta: { icon: "plus-square" },
+        meta: { icon: "plus-square", needLogin: true },
         component: () =>
           import(
             /* webpackChunkName: "tasks" */ "../views/process/AddProcess.vue"
@@ -75,7 +76,7 @@ const routes = [
       {
         path: "/repository",
         name: "知识库",
-        meta: { icon: "wallet" },
+        meta: { icon: "wallet", needLogin: true },
         component: () =>
           import(
             /* webpackChunkName: "tasks" */ "../views/repository/Repository.vue"
@@ -85,7 +86,7 @@ const routes = [
       {
         path: "/settings",
         name: "设置",
-        meta: { icon: "setting" },
+        meta: { icon: "setting", needLogin: true },
         component: () =>
           import(
             /* webpackChunkName: "tasks" */ "../views/settings/Settings.vue"
@@ -95,7 +96,7 @@ const routes = [
       {
         path: "/usersInfo",
         name: "用户管理",
-        meta: { icon: "team" },
+        meta: { icon: "team", needLogin: true },
         component: () =>
           import(/* webpackChunkName: "tasks" */ "../views/users/UsersInfo.vue")
       },
@@ -124,8 +125,19 @@ const router = new VueRouter({
 
 // 调用全局的 beforeEach 路由守卫
 router.beforeEach((to, form, next) => {
+  const hasToken = getToken();
   Nprogress.start();
-  next();
+  if (to.meta.needLogin) {
+    // 当页面需要登录才能访问时，判断浏览器是否存在token
+    if (hasToken) {
+      next();
+    } else {
+      next({ path: "/user/login" });
+    }
+    return;
+  } else {
+    return next();
+  }
 });
 
 // 调用全局的 afterEach 路由钩子

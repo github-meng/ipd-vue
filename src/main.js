@@ -19,8 +19,13 @@ import {
   Checkbox,
   Select,
   Row,
-  Col
+  Col,
+  Message,
+  Notification
 } from "ant-design-vue";
+
+Vue.prototype.$message = Message;
+Vue.prototype.$notification = Notification;
 
 Vue.use(Button);
 Vue.use(Layout);

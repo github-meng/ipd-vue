@@ -4,7 +4,7 @@ export function fetch(options) {
   return new Promise((resolve, reject) => {
     const instance = Axios.create({
       headers: {
-        // "Content-Type": "application/json"
+        "Content-Type": "application/json"
       },
       timeout: 10000
     });

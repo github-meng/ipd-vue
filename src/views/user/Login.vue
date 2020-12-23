@@ -17,7 +17,7 @@
         <a-form-item>
           <a-input
             v-decorator="[
-              'userName',
+              'username',
               {
                 rules: [{ required: true, message: '请输入用户名!' }]
               }
@@ -71,6 +71,9 @@
 </template>
 
 <script>
+import { getLogin } from "@/api/apis";
+import { setToken } from "@/cookies/cookie";
+import router from "@/router/index";
 export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "normal_login" });
@@ -80,7 +83,25 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
+          const userName = values.username.trim(); // 处理用户名首尾的空格
+          values.username = userName;
+          getLogin(values)
+            .then(result => {
+              if (result.code == "200") {
+                // 在登陆成功之后都将后台token保存在vuex及cookie中
+                this.$store.dispatch("saveUserInfo", result.data); // 调用store中actions事件进行登录
+                setToken(result.data.token); // 保存token到cookie中
+                router.push("/");
+              } else {
+                this.$notification.error({
+                  message: "error!",
+                  description: result.data
+                });
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
         }
       });
     }
