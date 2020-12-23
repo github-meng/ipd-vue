@@ -21,11 +21,13 @@ import {
   Row,
   Col,
   Message,
-  Notification
+  Notification,
+  Modal
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
 Vue.prototype.$notification = Notification;
+Vue.prototype.$confirm = Modal.confirm;
 
 Vue.use(Button);
 Vue.use(Layout);
@@ -44,6 +46,7 @@ Vue.use(Checkbox);
 Vue.use(Select);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Modal);
 Vue.config.productionTip = false;
 
 new Vue({

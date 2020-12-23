@@ -10,7 +10,7 @@
         Admin
         <a-icon type="down" />
       </a>
-      <a-menu slot="overlay" @click="handleMenuClick">
+      <a-menu slot="overlay">
         <a-menu-item key="1">
           <a-icon type="user" />
           个人信息
@@ -20,7 +20,7 @@
           修改密码
         </a-menu-item>
         <a-menu-divider />
-        <a-menu-item key="3">
+        <a-menu-item key="3" @click="handleMenuClick">
           <a-icon type="logout" />
           退出登录
         </a-menu-item>
@@ -112,6 +112,8 @@
 
 <script>
 import { Icon } from "ant-design-vue";
+import { removeToken } from "@/cookies/cookie";
+import router from "@/router/index";
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_2275690_pturnat813s.js"
@@ -146,9 +148,25 @@ export default {
     },
     handleMenuClick(e) {
       console.log(e);
-      if (e.key === "3") {
-        this.visible = false;
-      }
+      this.visible = false;
+      var self = this;
+      this.$confirm({
+        title: "退出管理平台",
+        content: "您确定要退出吗?",
+        okText: "确定",
+        okType: "danger",
+        cancelText: "取消",
+        maskClosable: true,
+        onOk() {
+          return new Promise(() => {
+            removeToken();
+            self.$store.dispatch("logout");
+            router.push("/user/login");
+            this.destroyAll();
+          }).catch(() => console.log("confirm errors!"));
+        },
+        onCancel() {}
+      });
     }
   }
 };

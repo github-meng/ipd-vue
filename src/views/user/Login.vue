@@ -48,7 +48,7 @@
               'remember',
               {
                 valuePropName: 'checked',
-                initialValue: true
+                initialValue: false
               }
             ]"
           >
@@ -83,13 +83,14 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
+          var self = this;
           const userName = values.username.trim(); // 处理用户名首尾的空格
           values.username = userName;
           getLogin(values)
             .then(result => {
               if (result.code == "200") {
                 // 在登陆成功之后都将后台token保存在vuex及cookie中
-                this.$store.dispatch("saveUserInfo", result.data); // 调用store中actions事件进行登录
+                self.$store.dispatch("saveUserInfo", result.data); // 调用store中actions事件进行登录
                 setToken(result.data.token); // 保存token到cookie中
                 router.push("/");
               } else {
