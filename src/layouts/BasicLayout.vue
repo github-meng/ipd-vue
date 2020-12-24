@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-layout id="components-layout-demo-side" style="min-height: 100vh">
+    <a-layout id="components-layout-demo-side">
       <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
         <div class="logo">
           <a href="/">
@@ -10,7 +10,7 @@
         </div>
         <SiderMenu />
       </a-layout-sider>
-      <a-layout>
+      <a-layout class="layout-box">
         <a-layout-header class="layout-header">
           <!-- <a-icon
           class="trigger"
@@ -19,14 +19,16 @@
         /> -->
           <Header />
         </a-layout-header>
-        <a-layout-content style="margin: 16px">
-          <transition>
-            <router-view></router-view>
-          </transition>
+        <a-layout-content class="layout-body">
+          <div class="scroll-layout-body">
+            <transition name="fade">
+              <router-view></router-view>
+            </transition>
+          </div>
         </a-layout-content>
-        <a-layout-footer style="text-align: center;padding: 16px 50px;">
+        <!-- <a-layout-footer style="text-align: center;padding: 16px 50px;">
           <Footer />
-        </a-layout-footer>
+        </a-layout-footer> -->
       </a-layout>
     </a-layout>
   </div>
@@ -34,12 +36,12 @@
 
 <script>
 import Header from "./Header";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
 export default {
   components: {
     Header,
-    Footer,
+    // Footer,
     SiderMenu
   },
   data() {
@@ -52,6 +54,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+#components-layout-demo-side {
+  min-height: 100vh;
+  max-height: 100vh;
+}
+.scroll-layout-body {
+  padding: 16px;
+  overflow: auto;
+  height: 100%;
+}
+// .layout-body {
+// margin: 16px;
+// overflow: hidden;
+// }
 .layout-header {
   background: #fff;
   padding: 0;

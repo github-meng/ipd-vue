@@ -79,9 +79,6 @@ export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "normal_login" });
   },
-  mounted() {
-    console.log("logout=", this.$store.state);
-  },
   data() {
     return {};
   },

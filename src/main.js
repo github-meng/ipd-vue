@@ -26,7 +26,9 @@ import {
   Spin,
   Card,
   PageHeader,
-  Radio
+  Radio,
+  Tree,
+  Affix
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -55,6 +57,8 @@ Vue.use(Spin);
 Vue.use(Card);
 Vue.use(PageHeader);
 Vue.use(Radio);
+Vue.use(Tree);
+Vue.use(Affix);
 Vue.config.productionTip = false;
 
 new Vue({
