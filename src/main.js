@@ -23,7 +23,10 @@ import {
   Message,
   Notification,
   Modal,
-  Spin
+  Spin,
+  Card,
+  PageHeader,
+  Radio
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -49,6 +52,9 @@ Vue.use(Row);
 Vue.use(Col);
 Vue.use(Modal);
 Vue.use(Spin);
+Vue.use(Card);
+Vue.use(PageHeader);
+Vue.use(Radio);
 Vue.config.productionTip = false;
 
 new Vue({

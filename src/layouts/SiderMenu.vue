@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin: 10px 0">
     <a-menu :default-selected-keys="selectKeys" mode="inline" theme="dark">
       <a-menu-item
         v-for="item in menuData"

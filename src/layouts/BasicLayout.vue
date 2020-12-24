@@ -19,12 +19,12 @@
         /> -->
           <Header />
         </a-layout-header>
-        <a-layout-content style="margin: 0 16px">
+        <a-layout-content style="margin: 16px">
           <transition>
             <router-view></router-view>
           </transition>
         </a-layout-content>
-        <a-layout-footer style="text-align: center">
+        <a-layout-footer style="text-align: center;padding: 16px 50px;">
           <Footer />
         </a-layout-footer>
       </a-layout>
@@ -67,13 +67,15 @@ export default {
     overflow: hidden;
     img {
       display: inline;
-      width: 48px;
-      height: 48px;
-      margin: 0;
+      width: 40px;
+      height: 40px;
+      margin: 4px;
     }
     h1 {
       font-size: 14px;
+      line-height: 20px;
       font-weight: 600;
+      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       color: #ffffff;
       margin: 0;
     }
