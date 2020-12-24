@@ -1,12 +1,13 @@
 import Axios from "axios";
-import { getToken } from "../cookies/cookie";
+// import { getToken } from "../cookies/cookie";
 // import router from "../router/index";
 // import { Message } from "ant-design-vue";
 
 //http request 拦截器
 Axios.interceptors.request.use(
   config => {
-    const token = getToken("ipd-Token"); // 注意使用的时候需要引入cookie方法，推荐js-cookie
+    // const token = getToken(); // 注意使用的时候需要引入cookie方法，推荐js-cookie
+    const token = window.sessionStorage.getItem("token"); // 注意使用的时候需要引入cookie方法，推荐js-cookie
     // config.data = JSON.stringify(config.data);
     // config.headers = {
     //   "Content-Type": "application/x-www-form-urlencoded"

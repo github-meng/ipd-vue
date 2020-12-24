@@ -72,11 +72,18 @@
 
 <script>
 import { getLogin } from "@/api/apis";
-import { setToken } from "@/cookies/cookie";
+// import { setToken } from "@/cookies/cookie";
 import router from "@/router/index";
+
 export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "normal_login" });
+  },
+  mounted() {
+    console.log("logout=", this.$store.state);
+  },
+  data() {
+    return {};
   },
   methods: {
     handleSubmit(e) {
@@ -89,15 +96,22 @@ export default {
           getLogin(values)
             .then(result => {
               if (result.code == "200") {
-                // 在登陆成功之后都将后台token保存在vuex及cookie中
-                self.$store.dispatch("saveUserInfo", result.data); // 调用store中actions事件进行登录
-                setToken(result.data.token); // 保存token到cookie中
+                // self.$store.dispatch("saveToken", result.data.token); // 调用store中actions事件,异步操作
+                // setToken(result.data.token); // 保存token到cookie中
+                self.$store.commit("SET_TOKEN", result.data.token); // 调用store中mutations事件,同步操作
+                self.$store.commit("SET_ROLE", result.data.role);
+                self.$store.commit("SET_USERNAME", result.data.username);
+                self.$store.commit("SET_USERIMAGE", result.data.userimage);
+                self.$store.commit("SET_PHONE", result.data.phone);
+                self.$store.commit("SET_EMAIL", result.data.email);
                 router.push("/");
               } else {
                 this.$notification.error({
                   message: "error!",
                   description: result.data
                 });
+                this.pwdStatus = "error";
+                this.pwdHelp = result.data;
               }
             })
             .catch(err => {

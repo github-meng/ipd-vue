@@ -22,7 +22,8 @@ import {
   Col,
   Message,
   Notification,
-  Modal
+  Modal,
+  Spin
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -47,6 +48,7 @@ Vue.use(Select);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Modal);
+Vue.use(Spin);
 Vue.config.productionTip = false;
 
 new Vue({

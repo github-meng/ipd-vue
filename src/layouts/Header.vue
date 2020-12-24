@@ -2,18 +2,14 @@
   <div class="header">
     <a-dropdown v-model="visible" class="ant-dropdown-user">
       <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-        <a-avatar
-          class="dropdown-avatar"
-          :src="require('../assets/ipd-logo.png')"
-          alt="头像"
-        />
-        Admin
+        <a-avatar class="dropdown-avatar" :src="userimage" alt="头像" />
+        {{ username }}
         <a-icon type="down" />
       </a>
       <a-menu slot="overlay">
         <a-menu-item key="1">
           <a-icon type="user" />
-          个人信息
+          个人中心
         </a-menu-item>
         <a-menu-item key="2">
           <a-icon type="key" />
@@ -92,14 +88,14 @@
           @change="onChange"
           @select="onSelect"
         >
-          <a-mentions-option value="afc163">
-            afc163
+          <a-mentions-option value="admin">
+            admin
           </a-mentions-option>
-          <a-mentions-option value="zombieJ">
-            zombieJ
+          <a-mentions-option value="user">
+            user
           </a-mentions-option>
-          <a-mentions-option value="yesmeck">
-            yesmeck
+          <a-mentions-option value="myj">
+            myj
           </a-mentions-option>
         </a-mentions>
         <a-button type="primary" class="mentions-btn">
@@ -112,7 +108,7 @@
 
 <script>
 import { Icon } from "ant-design-vue";
-import { removeToken } from "@/cookies/cookie";
+// import { removeToken } from "@/cookies/cookie";
 import router from "@/router/index";
 
 const IconFont = Icon.createFromIconfontCN({
@@ -126,6 +122,14 @@ export default {
       newsVisible: false,
       value: ""
     };
+  },
+  computed: {
+    username() {
+      return this.$store.getters.getterUserName;
+    },
+    userimage() {
+      return this.$store.getters.getterUserImage;
+    }
   },
   components: {
     IconFont
@@ -146,8 +150,7 @@ export default {
     newsDropdown() {
       this.newsVisible = !this.newsVisible;
     },
-    handleMenuClick(e) {
-      console.log(e);
+    handleMenuClick() {
       this.visible = false;
       var self = this;
       this.$confirm({
@@ -159,7 +162,7 @@ export default {
         maskClosable: true,
         onOk() {
           return new Promise(() => {
-            removeToken();
+            // removeToken(); // 移除cookie
             self.$store.dispatch("logout");
             router.push("/user/login");
             this.destroyAll();

@@ -31,10 +31,11 @@ export default {
     },
     getMenuData(routes, selectKey) {
       const finalMenuData = [];
+      const currentAuth = this.$store.getters.getterUserRole; // 获取当前登录用户的菜单权限
       routes.forEach(item => {
         if (item.showInMenu) {
           item.children.forEach(menu => {
-            if (menu.name) {
+            if (menu.name && menu.meta.authority.includes(currentAuth)) {
               this.selectKeysMap[menu.path] = [menu.path || selectKey];
               const newMenu = { ...menu };
               finalMenuData.push(newMenu);
