@@ -9,11 +9,11 @@ Axios.interceptors.request.use(
     // const token = getToken(); // 注意使用的时候需要引入cookie方法，推荐js-cookie
     const token = window.sessionStorage.getItem("token"); // 注意使用的时候需要引入cookie方法，推荐js-cookie
     // config.data = JSON.stringify(config.data);
-    // config.headers = {
-    //   "Content-Type": "application/x-www-form-urlencoded"
-    // };
     if (token) {
-      config.params = { token: token };
+      // config.params = { token: token };
+      config.headers = {
+        Authorization: token
+      };
     }
     // if (store.getters.token) {
     //   // 让每个请求携带token-- ['XN-Auth']为自定义Header key

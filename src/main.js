@@ -28,7 +28,8 @@ import {
   PageHeader,
   Radio,
   Tree,
-  Affix
+  Affix,
+  Empty
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -59,6 +60,7 @@ Vue.use(PageHeader);
 Vue.use(Radio);
 Vue.use(Tree);
 Vue.use(Affix);
+Vue.use(Empty);
 Vue.config.productionTip = false;
 
 new Vue({

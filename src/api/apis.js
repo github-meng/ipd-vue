@@ -1,5 +1,5 @@
 import { fetch } from "./fetch";
-import { post } from "./http";
+import { post, get } from "./http";
 
 // 本地mock数据，在public文件夹>mock
 export function getUserData() {
@@ -28,4 +28,9 @@ export function getLoginData(params) {
 //登录
 export function getLogin(data) {
   return post("/api/login", data);
+}
+
+//获取home页看板数据
+export function getCardLists() {
+  return get("/api/getCardLists");
 }
