@@ -57,6 +57,10 @@ export default {
 #components-layout-demo-side {
   min-height: 100vh;
   max-height: 100vh;
+  /deep/.ant-layout-sider {
+    max-height: 100vh;
+    overflow: hidden;
+  }
 }
 .scroll-layout-body {
   padding: 16px;

@@ -29,7 +29,10 @@ import {
   Radio,
   Tree,
   Affix,
-  Empty
+  Empty,
+  List,
+  Timeline,
+  Divider
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -61,6 +64,9 @@ Vue.use(Radio);
 Vue.use(Tree);
 Vue.use(Affix);
 Vue.use(Empty);
+Vue.use(List);
+Vue.use(Timeline);
+Vue.use(Divider);
 Vue.config.productionTip = false;
 
 new Vue({

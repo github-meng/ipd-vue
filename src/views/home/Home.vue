@@ -1,7 +1,7 @@
 <template>
   <div class="page-header-index-wide page-header-wrapper-grid-content-main">
     <a-row :gutter="12" class="ipd-prj-row">
-      <a-col :md="24" :lg="6" class="ipd-prj-col">
+      <a-col :md="6" :lg="6" class="ipd-prj-col">
         <div class="ipd-prj-left">
           <a-input-search
             style="padding: 8px;"
@@ -29,13 +29,13 @@
           </a-tree>
         </div>
       </a-col>
-      <a-col :md="24" :lg="18" class="ipd-prj-col">
+      <a-col :md="18" :lg="18" class="ipd-prj-col">
         <div class="ipd-prj-right">
           <div class="ipd-prj-r-header">
             <h5>项目信息</h5>
             <a-radio-group
               class="ipd-radio-group"
-              :value="size"
+              :value="selectTab"
               @change="handleSizeChange"
             >
               <a-radio-button value="panel" class="ipd-radio">
@@ -53,7 +53,7 @@
             </a-radio-group>
           </div>
           <div class="ipd-prj-r-body">
-            <transition name="ipd-prj-fade" v-if="size == 'panel'">
+            <transition name="ipd-prj-fade" v-if="selectTab == 'panel'">
               <div class="example" v-if="loading">
                 <a-spin tip="Loading..." />
               </div>
@@ -71,7 +71,9 @@
                   size="small"
                   class="prj-r-card"
                 >
-                  <a slot="extra" href="#">more</a>
+                  <a slot="extra" href="#" style="color: rgba(0, 0, 0, 0.85)">
+                    <a-icon type="menu-fold" />
+                  </a>
                   <a-card
                     class="item-card"
                     v-for="chItem in item.subLists"
@@ -88,14 +90,122 @@
                 </a-card>
               </a-space>
             </transition>
-            <transition name="ipd-prj-fade" v-else-if="size == 'info'">
-              <div>info</div>
+            <transition name="ipd-prj-fade" v-else-if="selectTab == 'info'">
+              <div class="ipd-info">
+                <div class="info-left">
+                  <a-list>
+                    <transition
+                      v-for="(item, index) in infoLeftLists"
+                      :key="index"
+                    >
+                      <a-list-item
+                        class="info-list-item"
+                        v-if="index < infoLeftLists.length - 1"
+                      >
+                        <p class="info-p">{{ item.key }}</p>
+                        <p class="info-p">{{ item.value }}</p>
+                      </a-list-item>
+                      <a-list-item class="info-last-item" v-else>
+                        <p class="info-p">{{ item.key }}</p>
+                        <p class="info-p">{{ item.value }}</p>
+                      </a-list-item>
+                    </transition>
+                  </a-list>
+                  <a-button
+                    type="danger"
+                    shape="round"
+                    size="small"
+                    icon="delete"
+                    :loading="endProLoading"
+                  >
+                    终止任务
+                  </a-button>
+                </div>
+                <div style="flex: 0 0 32px;"></div>
+                <div class="info-right">
+                  <a-timeline>
+                    <a-timeline-item
+                      color="red"
+                      v-for="line in infoRightLists"
+                      :key="line.id"
+                    >
+                      <div class="info-tline-header">
+                        <a-avatar
+                          :size="32"
+                          :src="line.userimage"
+                          style="flex: 0 0 32px;"
+                        />
+                        <p>{{ line.assignee }}</p>
+                        <span class="info-htime">{{ line.creatTime }}</span>
+                      </div>
+                      <div class="info-tline-body">
+                        <h6>【 {{ line.proName }} ｜提交】：</h6>
+                        <p>{{ line.content }}</p>
+                      </div>
+                    </a-timeline-item>
+                  </a-timeline>
+                </div>
+              </div>
             </transition>
-            <transition name="ipd-prj-fade" v-else-if="size == 'doc'">
-              <div>doc</div>
+            <transition name="ipd-prj-fade" v-else-if="selectTab == 'doc'">
+              <div class="ipd-doc">
+                <div class="ipd-doc-list" v-for="doc in docLists" :key="doc.id">
+                  <div class="ipd-itemize">{{ doc.className }}</div>
+                  <a-list style="flex: 0 0 80%;">
+                    <a-list-item
+                      class="doc-list-item"
+                      v-for="subDoc in doc.classFile"
+                      :key="subDoc.id"
+                    >
+                      <a-row class="ipd-list-row">
+                        <a-col :span="9">{{ subDoc.inFileName }}</a-col>
+                        <a-col :span="9">
+                          <div class="flex align-center">
+                            <a-icon
+                              :type="subDoc.fileIcon"
+                              :style="{
+                                fontSize: '20px',
+                                color: subDoc.fileColor
+                              }"
+                            />
+                            <div class="pl-4" style="width: 100%">
+                              <p class="doc-p">{{ subDoc.fileName }}</p>
+                              <p class="doc-p">
+                                文件大小: {{ subDoc.fileSize }}k
+                              </p>
+                            </div>
+                          </div>
+                        </a-col>
+                        <a-col :span="6">
+                          <a-button-group>
+                            <a-button
+                              size="small"
+                              type="link"
+                              style="font-size: 12px"
+                            >
+                              <a-icon type="arrow-down" />
+                              下载
+                            </a-button>
+                            <a-button
+                              size="small"
+                              type="link"
+                              style="font-size: 12px"
+                            >
+                              <a-icon type="search" />
+                              预览
+                            </a-button>
+                          </a-button-group>
+                        </a-col>
+                      </a-row>
+                    </a-list-item>
+                  </a-list>
+                </div>
+              </div>
             </transition>
-            <transition name="ipd-prj-fade" v-else-if="size == 'pro'">
-              <div>pro</div>
+            <transition name="ipd-prj-fade" v-else-if="selectTab == 'pro'">
+              <div class="ipd-pro">
+                <img :src="require('@/assets/ipd.png')" alt="ipd流程图" />
+              </div>
             </transition>
           </div>
         </div>
@@ -163,7 +273,7 @@ const getParentKey = (key, tree) => {
 };
 export default {
   created() {
-    getCardLists()
+    getCardLists(this.selectTab)
       .then(res => {
         if (res.code === "200") {
           this.cardLists = res.data.list;
@@ -173,11 +283,15 @@ export default {
       .catch(err => console.log(err));
   },
   data() {
-    // const cardLists =
     return {
-      size: "panel",
+      selectTab: "panel",
       loading: true,
       cardLists: [],
+      infoLeftLists: [],
+      infoRightLists: [],
+      docLists: [],
+      endProLoading: false,
+      listData: [],
       expandedKeys: [],
       searchValue: "",
       autoExpandParent: true,
@@ -206,8 +320,47 @@ export default {
       });
     },
     handleSizeChange(e) {
-      this.size = e.target.value;
-      console.log(this.size);
+      this.selectTab = e.target.value;
+      if (this.selectTab == "panel") {
+        if (this.cardLists && this.cardLists.length > 0) {
+          return;
+        }
+      } else if (this.selectTab == "info") {
+        if (this.infoLeftLists && this.infoLeftLists.length > 0) {
+          return;
+        }
+      } else if (this.selectTab == "doc") {
+        if (this.docLists && this.docLists.length > 0) {
+          return;
+        }
+      }
+      this.getInfoMsg(this.selectTab);
+    },
+    getInfoMsg(param) {
+      getCardLists(param)
+        .then(res => {
+          if (res.code === "200") {
+            switch (this.selectTab) {
+              case "panel":
+                this.cardLists = res.data.list;
+                break;
+              case "info":
+                this.infoLeftLists = res.data.list;
+                this.infoRightLists = res.data.chart;
+                break;
+              case "doc":
+                this.docLists = res.data;
+                break;
+              case "pro":
+                break;
+              default:
+                this.cardLists = res.data.list;
+            }
+
+            this.loading = false;
+          }
+        })
+        .catch(err => console.log(err));
     }
   }
 };
@@ -245,6 +398,9 @@ export default {
   flex-flow: column;
   // box-shadow: 0 0 5px #cccccc;
   background: #f5f5f5;
+  /deep/.ant-card-head-title {
+    font-weight: normal;
+  }
   .item-card {
     box-shadow: 0 0 5px #dddddd;
     border-radius: 2px;
@@ -265,6 +421,7 @@ export default {
       margin: 0 0 8px 0;
       color: #333333;
       font-size: 14px;
+      font-weight: normal;
     }
     p {
       margin: 0;
@@ -386,5 +543,154 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+// common css
+.flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+.ipd-span {
+  color: #999999;
+}
+p {
+  margin: 0;
+}
+.pl-4 {
+  padding-left: 4px;
+}
+.info-list-item {
+  background: #f5f5f5;
+  border-radius: 30px;
+  padding: 8px 0;
+  border: none;
+  &:nth-child(2n) {
+    background: #ffffff;
+  }
+  p.info-p {
+    margin: 0;
+    &:first-child {
+      width: 35%;
+      text-align: left;
+      text-indent: 14px;
+    }
+    &:last-child {
+      width: 65%;
+      text-align: left;
+      line-height: 16px;
+      font-size: 13px;
+    }
+  }
+}
+// 项目信息tab
+.ipd-info {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  justify-content: space-between;
+  .info-left,
+  .info-right {
+    flex: 0 0 calc(-16px + 50%);
+  }
+  .info-last-item {
+    flex-flow: column;
+    align-items: normal;
+    p {
+      &:first-child {
+        text-align: left;
+        text-indent: 14px;
+        padding-bottom: 6px;
+      }
+      &:last-child {
+        margin: 0;
+        padding: 14px;
+        border: 1px dashed #dddddd;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #999999;
+      }
+    }
+  }
+  .info-right {
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    padding: 12px;
+    overflow: auto;
+    .info-tline-header {
+      display: flex;
+      align-items: center;
+      p {
+        margin: 0 8px;
+        font-size: 14px;
+        line-height: 32px;
+        font-weight: normal;
+        color: #000000a6;
+      }
+      span.info-htime {
+        font-size: 12px;
+        color: #999999;
+      }
+    }
+    .info-tline-body {
+      padding-left: 40px;
+      h6 {
+        margin: 0;
+        font-size: 12px;
+        color: #999999;
+      }
+      p {
+        margin: 0;
+        font-size: 13px;
+      }
+    }
+  }
+}
+// 文档样式
+.ipd-doc {
+  width: 100%;
+  padding: 12px;
+  .ipd-doc-list {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .ipd-itemize {
+    flex: 0 0 20%;
+    text-align: center;
+  }
+  .ipd-list-row {
+    width: 100%;
+    padding: 0 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  .doc-list-item {
+    background: #f5f5f5;
+    border-radius: 30px;
+    padding: 8px 0;
+    border: none;
+    &:nth-child(2n) {
+      background: #ffffff;
+    }
+    p.doc-p {
+      line-height: 14px;
+      &:last-child {
+        color: #999999;
+        font-size: 11px;
+      }
+    }
+  }
+}
+// 流程突css
+.ipd-pro {
+  img {
+    width: 100%;
+    display: inline;
+    margin: 50px auto;
+  }
 }
 </style>
