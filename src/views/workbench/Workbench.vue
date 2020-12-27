@@ -4,15 +4,15 @@
       <a-row class="ipd-wb-row">
         <a-col :span="8">
           <p class="wb-col-p">我的待办</p>
-          <h2>{{ myTagNum }}个任务</h2>
+          <h2>{{ myTagNum }}</h2>
         </a-col>
         <a-col :span="8" class="col-center">
-          <p class="wb-col-p">本周任务平均处理时间</p>
-          <h2>32分钟</h2>
+          <p class="wb-col-p">本周截止任务</p>
+          <h2>2</h2>
         </a-col>
         <a-col :span="8">
-          <p class="wb-col-p">本周完成任务数</p>
-          <h2>{{ myFinishNum }}个任务</h2>
+          <p class="wb-col-p">已完成任务数</p>
+          <h2>{{ myFinishNum }}</h2>
         </a-col>
       </a-row>
     </a-card>

@@ -30,7 +30,7 @@
     >
       <a class="ant-dropdown-link" @click="newsDropdown">
         <a-badge :count="99" class="icons-list">
-          <icon-font type="icon-tongzhi1" />
+          <icon-font type="icon-ipd-news" />
         </a-badge>
       </a>
       <a-menu slot="overlay" class="menu-tabs">
@@ -51,7 +51,7 @@
 
     <div class="drawer-btn" @click="openDrawer">
       <a-badge dot :count="5" class="icons-list">
-        <icon-font type="icon-liaotian" />
+        <icon-font type="icon-ipd-chart" />
       </a-badge>
     </div>
     <a-drawer
@@ -107,13 +107,10 @@
 </template>
 
 <script>
-import { Icon } from "ant-design-vue";
+// import { Icon } from "ant-design-vue";
 // import { removeToken } from "@/cookies/cookie";
 import router from "@/router/index";
 
-const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_2275690_pturnat813s.js"
-});
 export default {
   data() {
     return {
@@ -130,9 +127,6 @@ export default {
     userimage() {
       return this.$store.getters.getterUserImage;
     }
-  },
-  components: {
-    IconFont
   },
   methods: {
     onSelect(option) {

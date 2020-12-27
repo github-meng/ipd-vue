@@ -32,7 +32,8 @@ import {
   Empty,
   List,
   Timeline,
-  Divider
+  Divider,
+  Collapse
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -67,7 +68,14 @@ Vue.use(Empty);
 Vue.use(List);
 Vue.use(Timeline);
 Vue.use(Divider);
+Vue.use(Collapse);
 Vue.config.productionTip = false;
+
+// 引入阿里iconfont图标库中的图标
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: "//at.alicdn.com/t/font_2275690_s5qpqefv4b.js"
+});
+Vue.component("IconFont", IconFont);
 
 new Vue({
   router,

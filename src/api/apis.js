@@ -40,3 +40,8 @@ export function getCardLists(query) {
 export function getWorkbenchLists() {
   return get("/api/workbench");
 }
+
+//获取process页新建流程数据
+export function getProcessLists() {
+  return get("/api/process");
+}

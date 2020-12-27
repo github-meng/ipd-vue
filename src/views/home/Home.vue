@@ -388,7 +388,7 @@ export default {
     height: 100%;
   }
   .ipd-prj-col {
-    height: 100%;
+    height: calc(100vh - 80px);
   }
 }
 .prj-r-card {
