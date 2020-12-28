@@ -22,7 +22,7 @@
                 rules: [{ required: true, message: '请输入用户名!' }]
               }
             ]"
-            placeholder="用户名"
+            placeholder="admin Or user"
           >
             <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
           </a-input>
@@ -36,7 +36,7 @@
               }
             ]"
             type="password"
-            placeholder="密码"
+            placeholder="ipd_vue"
           >
             <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
           </a-input>
