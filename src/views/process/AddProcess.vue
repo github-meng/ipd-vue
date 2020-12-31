@@ -87,7 +87,7 @@ export default {
     width: 64px;
     height: 64px;
     background-color: #eeeeee;
-    border: 1px dashed #dddddd;
+    border: 2px dashed #dddddd;
     margin: 0 auto;
     border-radius: 8px;
   }

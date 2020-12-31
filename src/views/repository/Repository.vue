@@ -1,10 +1,272 @@
 <template>
-  <div>知识库</div>
+  <a-card :bordered="false" id="ipd-repository">
+    <div class="ipd-repository-header">
+      <h5>知识库管理</h5>
+      <a-radio-group
+        class="ipd-radio-group"
+        :value="selectTab"
+        @change="handleSizeChange"
+      >
+        <a-radio-button value="doc" class="ipd-radio">
+          文件
+        </a-radio-button>
+        <a-radio-button value="text" class="ipd-radio">
+          文本
+        </a-radio-button>
+        <a-radio-button value="link" class="ipd-radio">
+          链接
+        </a-radio-button>
+        <a-radio-button value="list" class="ipd-radio">
+          checklist
+        </a-radio-button>
+      </a-radio-group>
+    </div>
+    <div class="ipd-repository-body">
+      <transition name="ipd-prj-fade" v-if="selectTab == 'doc'">
+        <div>
+          <a-table
+            :columns="columnsDoc"
+            :data-source="data"
+            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+          >
+            <template slot="action">
+              <a-tag color="green">
+                <a-icon type="search" />
+                <span>查看</span>
+              </a-tag>
+              <a-tag color="blue">
+                <a-icon type="edit" />
+                <span>修改</span>
+              </a-tag>
+              <a-tag color="red">
+                <a-icon type="delete" />
+                <span>删除</span>
+              </a-tag>
+            </template>
+          </a-table>
+        </div>
+      </transition>
+      <transition name="ipd-prj-fade" v-else-if="selectTab == 'text'">
+        <div>
+          <a-table
+            :columns="columnsText"
+            :data-source="data"
+            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+          >
+            <template slot="action">
+              <a-tag color="green">
+                <a-icon type="search" />
+                <span>查看</span>
+              </a-tag>
+              <a-tag color="blue">
+                <a-icon type="edit" />
+                <span>修改</span>
+              </a-tag>
+              <a-tag color="red">
+                <a-icon type="delete" />
+                <span>删除</span>
+              </a-tag>
+            </template>
+          </a-table>
+        </div>
+      </transition>
+      <transition name="ipd-prj-fade" v-else-if="selectTab == 'link'">
+        <div>
+          <a-table
+            :columns="columnsLink"
+            :data-source="data"
+            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+          >
+            <template slot="action">
+              <a-tag color="green">
+                <a-icon type="search" />
+                <span>查看</span>
+              </a-tag>
+              <a-tag color="blue">
+                <a-icon type="edit" />
+                <span>修改</span>
+              </a-tag>
+              <a-tag color="red">
+                <a-icon type="delete" />
+                <span>删除</span>
+              </a-tag>
+            </template>
+          </a-table>
+        </div>
+      </transition>
+      <transition name="ipd-prj-fade" v-else-if="selectTab == 'list'">
+        <div>
+          <a-table
+            :columns="columnsList"
+            :data-source="data"
+            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+          >
+            <template slot="action">
+              <a-tag color="green">
+                <a-icon type="search" />
+                <span>查看</span>
+              </a-tag>
+              <a-tag color="blue">
+                <a-icon type="edit" />
+                <span>修改</span>
+              </a-tag>
+              <a-tag color="red">
+                <a-icon type="delete" />
+                <span>删除</span>
+              </a-tag>
+            </template>
+          </a-table>
+        </div>
+      </transition>
+    </div>
+  </a-card>
 </template>
-
 <script>
-export default {};
+import Mock from "mockjs";
+const Random = Mock.Random;
+const columnsDoc = [
+  { title: "序号", dataIndex: "key", key: "key", width: 80 },
+  { title: "名称", dataIndex: "name", key: "name", width: 300 },
+  { title: "标签", dataIndex: "tag", key: "tag", width: 200 },
+  { title: "应用类型", dataIndex: "type", key: "type", width: 100 },
+  { title: "文件名", dataIndex: "docName", key: "docName", width: 200 },
+  { title: "文件大小", dataIndex: "docSize", key: "docSize", width: 100 },
+  { title: "创建时间", dataIndex: "createTime", key: "createTime", width: 200 },
+  {
+    title: "操作",
+    key: "action",
+    width: 220,
+    scopedSlots: { customRender: "action" }
+  }
+];
+const columnsText = [
+  { title: "序号", dataIndex: "key", key: "key", width: 80 },
+  { title: "名称", dataIndex: "name", key: "name", width: 300 },
+  { title: "标签", dataIndex: "tag", key: "tag", width: 200 },
+  { title: "应用类型", dataIndex: "type", key: "type", width: 100 },
+  { title: "创建时间", dataIndex: "createTime", key: "createTime", width: 200 },
+  {
+    title: "操作",
+    key: "action",
+    width: 220,
+    scopedSlots: { customRender: "action" }
+  }
+];
+const columnsLink = [
+  { title: "序号", dataIndex: "key", key: "key", width: 80 },
+  { title: "名称", dataIndex: "name", key: "name", width: 300 },
+  { title: "标签", dataIndex: "tag", key: "tag", width: 200 },
+  { title: "应用类型", dataIndex: "type", key: "type", width: 100 },
+  { title: "链接", dataIndex: "link", key: "link", width: 150 },
+  { title: "创建时间", dataIndex: "createTime", key: "createTime", width: 200 },
+  {
+    title: "操作",
+    key: "action",
+    width: 220,
+    scopedSlots: { customRender: "action" }
+  }
+];
+const columnsList = [
+  { title: "序号", dataIndex: "key", key: "key", width: 80 },
+  { title: "名称", dataIndex: "name", key: "name", width: 300 },
+  { title: "标签", dataIndex: "tag", key: "tag", width: 200 },
+  { title: "应用类型", dataIndex: "type", key: "type", width: 100 },
+  { title: "创建时间", dataIndex: "createTime", key: "createTime", width: 200 },
+  {
+    title: "操作",
+    key: "action",
+    width: 220,
+    scopedSlots: { customRender: "action" }
+  }
+];
+
+const data = [];
+const dataNum = Random.integer(11, 100);
+for (let i = 0; i < dataNum; i++) {
+  data.push({
+    key: `${i + 1}`,
+    name: Random.ctitle(5, 45),
+    tag: Random.ctitle(3, 10),
+    type: Random.ctitle(4),
+    docName: Random.ctitle(5, 15),
+    docSize: Random.natural(10, 500),
+    createTime: Random.datetime(),
+    link: Random.url()
+  });
+}
+
+export default {
+  data() {
+    return {
+      selectTab: "doc",
+      data,
+      columnsDoc,
+      columnsText,
+      columnsLink,
+      columnsList
+    };
+  },
+  methods: {
+    handleSizeChange(e) {
+      this.selectTab = e.target.value;
+    }
+  }
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="less"></style>
+<style lang="less" scoped>
+#ipd-repository {
+  height: calc(100vh - 80px);
+  /deep/.ant-card-body {
+    padding: 12px;
+  }
+}
+.ipd-repository-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 16px;
+  margin-bottom: 16px;
+  h5 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .ipd-radio-group {
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: 5px;
+  }
+  .ipd-radio {
+    background: transparent;
+    border-radius: 20px;
+    border: none;
+    height: 30px;
+  }
+  /deep/.ant-radio-button-wrapper-checked:hover {
+    box-shadow: 0 0 5px #cccccc;
+  }
+  /deep/.ant-radio-button-wrapper:hover {
+    color: #999999;
+  }
+  /deep/.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    border: none;
+    background: #ffffff;
+    box-shadow: 0 0 5px #cccccc;
+    color: rgba(0, 0, 0, 0.65);
+  }
+  /deep/.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):first-child {
+    box-shadow: 0 0 5px #cccccc !important;
+    color: rgba(0, 0, 0, 0.65);
+  }
+  /deep/.ant-radio-button-wrapper:not(:first-child)::before {
+    display: none !important;
+  }
+  /deep/.ant-radio-button-wrapper:focus-within {
+    outline: none;
+  }
+}
+.ant-tag:last-child {
+  margin: 0;
+}
+</style>

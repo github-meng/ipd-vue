@@ -33,7 +33,9 @@ import {
   List,
   Timeline,
   Divider,
-  Collapse
+  Collapse,
+  Table,
+  Tag
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -69,6 +71,8 @@ Vue.use(List);
 Vue.use(Timeline);
 Vue.use(Divider);
 Vue.use(Collapse);
+Vue.use(Table);
+Vue.use(Tag);
 Vue.config.productionTip = false;
 
 // 引入阿里iconfont图标库中的图标
