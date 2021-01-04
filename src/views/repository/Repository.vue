@@ -24,10 +24,18 @@
     <div class="ipd-repository-body">
       <transition name="ipd-prj-fade" v-if="selectTab == 'doc'">
         <div>
+          <a-button type="danger" icon="plus">
+            新建文档
+          </a-button>
+          <a-input-search
+            placeholder="搜索文档名称"
+            style="width: 200px;margin-bottom: 10px;margin-left: 16px;"
+          />
           <a-table
+            size="small"
             :columns="columnsDoc"
             :data-source="data"
-            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+            :scroll="{ x: 1400, y: 'calc(100vh - 280px)' }"
           >
             <template slot="action">
               <a-tag color="green">
@@ -48,10 +56,18 @@
       </transition>
       <transition name="ipd-prj-fade" v-else-if="selectTab == 'text'">
         <div>
+          <a-button type="danger" icon="plus">
+            新建文本
+          </a-button>
+          <a-input-search
+            placeholder="搜索文档名称"
+            style="width: 200px;margin-bottom: 10px;margin-left: 16px;"
+          />
           <a-table
+            size="small"
             :columns="columnsText"
             :data-source="data"
-            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+            :scroll="{ x: 1400, y: 'calc(100vh - 280px)' }"
           >
             <template slot="action">
               <a-tag color="green">
@@ -72,10 +88,18 @@
       </transition>
       <transition name="ipd-prj-fade" v-else-if="selectTab == 'link'">
         <div>
+          <a-button type="danger" icon="plus">
+            新建链接
+          </a-button>
+          <a-input-search
+            placeholder="搜索文档名称"
+            style="width: 200px;margin-bottom: 10px;margin-left: 16px;"
+          />
           <a-table
+            size="small"
             :columns="columnsLink"
             :data-source="data"
-            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+            :scroll="{ x: 1400, y: 'calc(100vh - 280px)' }"
           >
             <template slot="action">
               <a-tag color="green">
@@ -96,10 +120,18 @@
       </transition>
       <transition name="ipd-prj-fade" v-else-if="selectTab == 'list'">
         <div>
+          <a-button type="danger" icon="plus">
+            新建checklist
+          </a-button>
+          <a-input-search
+            placeholder="搜索文档名称"
+            style="width: 200px;margin-bottom: 10px;margin-left: 16px;"
+          />
           <a-table
+            size="small"
             :columns="columnsList"
             :data-source="data"
-            :scroll="{ x: 1024, y: 'calc(100vh - 300px)' }"
+            :scroll="{ x: 1400, y: 'calc(100vh - 280px)' }"
           >
             <template slot="action">
               <a-tag color="green">
@@ -225,8 +257,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 16px;
-  margin-bottom: 16px;
+  padding: 5px 0;
   h5 {
     margin: 0;
     font-size: 15px;
@@ -268,5 +299,12 @@ export default {
 }
 .ant-tag:last-child {
   margin: 0;
+}
+/deep/.ant-table-content .ant-table-header {
+  background-color: #001529;
+  margin-bottom: -17px !important;
+}
+/deep/.ant-table-fixed tr th {
+  color: #ffffff;
 }
 </style>
