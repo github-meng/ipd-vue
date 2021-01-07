@@ -35,6 +35,7 @@ import {
   Divider,
   Collapse,
   Table,
+  Tooltip,
   Tag
 } from "ant-design-vue";
 
@@ -73,6 +74,7 @@ Vue.use(Divider);
 Vue.use(Collapse);
 Vue.use(Table);
 Vue.use(Tag);
+Vue.use(Tooltip);
 Vue.config.productionTip = false;
 
 // 引入阿里iconfont图标库中的图标

@@ -36,6 +36,12 @@ export function getCardLists(query) {
   return get(url);
 }
 
+//获取home页看板detail数据
+export function getPanelDetailLists() {
+  const url = "/api/getPanelDetail";
+  return get(url);
+}
+
 //获取workbench页工作台数据
 export function getWorkbenchLists() {
   return get("/api/workbench");

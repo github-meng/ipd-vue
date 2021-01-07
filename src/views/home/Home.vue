@@ -79,6 +79,7 @@
                     v-for="chItem in item.subLists"
                     :key="chItem.id"
                     :bordered="false"
+                    @click="toPanelFn(chItem)"
                   >
                     <h3>{{ chItem.name }}</h3>
                     <p>
@@ -211,11 +212,13 @@
         </div>
       </a-col>
     </a-row>
+    <panel-modal ref="panelModalRef" :data-to-child="dataToChild" />
   </div>
 </template>
 
 <script>
 import { getCardLists } from "@/api/apis";
+import PanelModal from "@/components/PanelModal.vue";
 const x = 3;
 const y = 2;
 const z = 1;
@@ -272,6 +275,7 @@ const getParentKey = (key, tree) => {
   return parentKey;
 };
 export default {
+  components: { PanelModal },
   created() {
     getCardLists(this.selectTab)
       .then(res => {
@@ -295,10 +299,15 @@ export default {
       expandedKeys: [],
       searchValue: "",
       autoExpandParent: true,
-      gData
+      gData,
+      dataToChild: new Object()
     };
   },
   methods: {
+    toPanelFn(item) {
+      this.dataToChild = item;
+      this.$refs.panelModalRef.showModal();
+    },
     onExpand(expandedKeys) {
       this.expandedKeys = expandedKeys;
       this.autoExpandParent = false;
@@ -455,6 +464,7 @@ export default {
   h5 {
     margin: 0;
     font-size: 14px;
+    font-weight: bold;
   }
   .ipd-radio-group {
     background: #f5f5f5;
