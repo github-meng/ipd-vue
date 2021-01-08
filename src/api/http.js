@@ -7,19 +7,13 @@ import Axios from "axios";
 Axios.interceptors.request.use(
   config => {
     // const token = getToken(); // 注意使用的时候需要引入cookie方法，推荐js-cookie
-    const token = window.sessionStorage.getItem("token"); // 注意使用的时候需要引入cookie方法，推荐js-cookie
-    // config.data = JSON.stringify(config.data);
+    const token = window.sessionStorage.getItem("token");
     if (token) {
-      // config.params = { token: token };
       config.headers = {
-        Authorization: token
+        Authorization: token // 让每个请求携带token
       };
     }
-    // if (store.getters.token) {
-    //   // 让每个请求携带token-- ['XN-Auth']为自定义Header key
-    //   config.headers["XN-Auth"] = getToken();
-    // }
-    console.log("config拦截器=", config);
+    console.log("request拦截器=", config);
     return config;
   },
   error => {

@@ -4,7 +4,7 @@
       <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
         <div class="logo">
           <a href="/">
-            <img src="../assets/ipd-logo.png" alt="logo" />
+            <img src="@/assets/7-1.png" alt="logo" />
             <h1>流程系统</h1>
           </a>
         </div>
@@ -89,6 +89,8 @@ export default {
       width: 40px;
       height: 40px;
       margin: 4px;
+      border-radius: 20px;
+      background-color: #ffffff;
     }
     h1 {
       font-size: 14px;

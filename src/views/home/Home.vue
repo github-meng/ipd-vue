@@ -92,6 +92,9 @@
               </a-space>
             </transition>
             <transition name="ipd-prj-fade" v-else-if="selectTab == 'info'">
+              <div class="example" v-if="loading">
+                <a-spin tip="Loading..." />
+              </div>
               <div class="ipd-info">
                 <div class="info-left">
                   <a-list>
@@ -149,6 +152,9 @@
               </div>
             </transition>
             <transition name="ipd-prj-fade" v-else-if="selectTab == 'doc'">
+              <div class="example" v-if="loading">
+                <a-spin tip="Loading..." />
+              </div>
               <div class="ipd-doc">
                 <div class="ipd-doc-list" v-for="doc in docLists" :key="doc.id">
                   <div class="ipd-itemize">{{ doc.className }}</div>
@@ -159,8 +165,8 @@
                       :key="subDoc.id"
                     >
                       <a-row class="ipd-list-row">
-                        <a-col :span="9">{{ subDoc.inFileName }}</a-col>
-                        <a-col :span="9">
+                        <a-col :span="10">{{ subDoc.inFileName }}</a-col>
+                        <a-col :span="10">
                           <div class="flex align-center">
                             <a-icon
                               :type="subDoc.fileIcon"
@@ -177,25 +183,30 @@
                             </div>
                           </div>
                         </a-col>
-                        <a-col :span="6">
-                          <a-button-group>
-                            <a-button
-                              size="small"
-                              type="link"
-                              style="font-size: 12px"
-                            >
-                              <a-icon type="arrow-down" />
-                              下载
+                        <a-col :span="4" align="right">
+                          <a-tooltip>
+                            <template slot="title">
+                              <span>下载</span>
+                            </template>
+                            <a-button type="link" size="small">
+                              <icon-font
+                                type="icon-xiazai"
+                                style="color: #2db7f5;"
+                              />
                             </a-button>
-                            <a-button
-                              size="small"
-                              type="link"
-                              style="font-size: 12px"
-                            >
-                              <a-icon type="search" />
-                              预览
+                          </a-tooltip>
+                          <a-divider type="vertical" />
+                          <a-tooltip>
+                            <template slot="title">
+                              <span>预览</span>
+                            </template>
+                            <a-button type="link" size="small">
+                              <icon-font
+                                type="icon-search"
+                                style="color: orange;"
+                              />
                             </a-button>
-                          </a-button-group>
+                          </a-tooltip>
                         </a-col>
                       </a-row>
                     </a-list-item>
@@ -346,6 +357,7 @@ export default {
       this.getInfoMsg(this.selectTab);
     },
     getInfoMsg(param) {
+      this.loading = true;
       getCardLists(param)
         .then(res => {
           if (res.code === "200") {

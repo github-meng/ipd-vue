@@ -1,6 +1,11 @@
 <template>
   <div style="margin: 10px 0">
-    <a-menu :default-selected-keys="selectKeys" mode="inline" theme="dark">
+    <a-menu
+      :default-selected-keys="selectKeys"
+      :selectedKeys="selectKeys"
+      mode="inline"
+      theme="dark"
+    >
       <a-menu-item
         v-for="item in menuData"
         :key="item.path"
@@ -24,6 +29,11 @@ export default {
       menuData,
       selectKeys: this.selectKeysMap[this.$route.path]
     };
+  },
+  watch: {
+    $route(to) {
+      this.selectKeys = this.selectKeysMap[to.path];
+    }
   },
   methods: {
     handelClickLink(item) {

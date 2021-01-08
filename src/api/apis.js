@@ -10,20 +10,20 @@ export function getUserData() {
 }
 
 // fastmock在线平台模拟接口
-export function getTestData() {
-  return fetch({
-    url: "/api/test",
-    methoh: "get"
-  });
-}
+// export function getTestData() {
+//   return fetch({
+//     url: "/api/test",
+//     methoh: "get"
+//   });
+// }
 
-export function getLoginData(params) {
-  return fetch({
-    url: "/api/login",
-    method: "post",
-    data: params
-  });
-}
+// export function getLoginData(params) {
+//   return fetch({
+//     url: "/api/login",
+//     method: "post",
+//     data: params
+//   });
+// }
 
 //登录
 export function getLogin(data) {

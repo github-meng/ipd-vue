@@ -4,7 +4,7 @@
     :style="{ backgroundImage: 'url(' + require('@/assets/bg.jpg') + ')' }"
   >
     <div class="ipd-login-logo">
-      <img :src="require('@/assets/ipd-logo.png')" alt="logo" />
+      <img :src="require('@/assets/7-1.png')" alt="logo" />
       <p>研发流程系统</p>
     </div>
     <div class="ipd-login-body">
@@ -54,7 +54,7 @@
           >
             记住我
           </a-checkbox>
-          <a class="login-form-forgot" href="">
+          <a class="login-form-forgot" href="javascript:;">
             忘记密码？
           </a>
           <a-button type="primary" html-type="submit" class="login-form-button">

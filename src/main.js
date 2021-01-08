@@ -36,7 +36,8 @@ import {
   Collapse,
   Table,
   Tooltip,
-  Tag
+  Tag,
+  Upload
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -75,11 +76,12 @@ Vue.use(Collapse);
 Vue.use(Table);
 Vue.use(Tag);
 Vue.use(Tooltip);
+Vue.use(Upload);
 Vue.config.productionTip = false;
 
 // 引入阿里iconfont图标库中的图标
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_2275690_s5qpqefv4b.js"
+  scriptUrl: "//at.alicdn.com/t/font_2275690_j4jlaj8q8q.js"
 });
 Vue.component("IconFont", IconFont);
 

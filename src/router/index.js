@@ -55,7 +55,7 @@ const routes = [
           authority: ["admin", "ordinary"]
         },
         component: () =>
-          import(/* webpackChunkName: "dashboard" */ "../views/home/Home.vue")
+          import(/* webpackChunkName: "home" */ "../views/home/Home.vue")
       },
       // workbench
       {
@@ -68,7 +68,7 @@ const routes = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "tasks" */ "../views/workbench/Workbench.vue"
+            /* webpackChunkName: "workbench" */ "../views/workbench/Workbench.vue"
           )
       },
       // process
@@ -82,7 +82,7 @@ const routes = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "tasks" */ "../views/process/AddProcess.vue"
+            /* webpackChunkName: "process" */ "../views/process/AddProcess.vue"
           )
       },
       // repository
@@ -96,7 +96,7 @@ const routes = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "tasks" */ "../views/repository/Repository.vue"
+            /* webpackChunkName: "repository" */ "../views/repository/Repository.vue"
           )
       },
       // settings
@@ -110,7 +110,7 @@ const routes = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "tasks" */ "../views/settings/Settings.vue"
+            /* webpackChunkName: "settings" */ "../views/settings/Settings.vue"
           )
       },
       // usersInfo
@@ -123,7 +123,9 @@ const routes = [
           authority: ["admin"]
         },
         component: () =>
-          import(/* webpackChunkName: "tasks" */ "../views/users/UsersInfo.vue")
+          import(
+            /* webpackChunkName: "usersInfo" */ "../views/users/UsersInfo.vue"
+          )
       },
       // help
       {
@@ -131,7 +133,7 @@ const routes = [
         name: "帮助",
         meta: { icon: "question-circle", authority: ["admin", "ordinary"] },
         component: () =>
-          import(/* webpackChunkName: "tasks" */ "../views/help/Help.vue")
+          import(/* webpackChunkName: "help" */ "../views/help/Help.vue")
       }
     ]
   },

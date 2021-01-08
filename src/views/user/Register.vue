@@ -4,7 +4,7 @@
     :style="{ backgroundImage: 'url(' + require('@/assets/bg.jpg') + ')' }"
   >
     <div class="ipd-register-logo">
-      <img :src="require('@/assets/ipd-logo.png')" alt="logo" />
+      <img :src="require('@/assets/7-1.png')" alt="logo" />
       <p>研发流程系统</p>
     </div>
     <div class="ipd-register-body">

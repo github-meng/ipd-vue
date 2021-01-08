@@ -24,7 +24,9 @@
     >
       <a-list class="demo-loadmore-list" item-layout="horizontal">
         <a-list-item v-for="(item, index) in workLists.wbLists" :key="index">
-          <a slot="actions" href="#"> <a-icon type="arrow-right" />前往 </a>
+          <a slot="actions" @click="goToHome">
+            <a-icon type="arrow-right" />前往
+          </a>
           <a-list-item-meta :description="item.proName">
             <span slot="title">{{ item.subtask }}</span>
             <a-avatar slot="avatar" :src="require('@/assets/tag.png')" />
@@ -61,6 +63,11 @@ export default {
       myFinishNum: 0,
       loading: true
     };
+  },
+  methods: {
+    goToHome() {
+      this.$router.push({ path: "/home" });
+    }
   }
 };
 </script>
