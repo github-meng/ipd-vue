@@ -81,7 +81,7 @@ Vue.config.productionTip = false;
 
 // 引入阿里iconfont图标库中的图标
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_2275690_j4jlaj8q8q.js"
+  scriptUrl: "//at.alicdn.com/t/font_2275690_nil3gov32rd.js"
 });
 Vue.component("IconFont", IconFont);
 

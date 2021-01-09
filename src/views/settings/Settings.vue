@@ -3,7 +3,6 @@
     <a-tabs default-active-key="1" tabPosition="left" @change="callback">
       <a-tab-pane key="1" tab="流程管理">
         <a-table :columns="columns" :data-source="data">
-          <a slot="name" slot-scope="text">{{ text }}</a>
           <span slot="customTitle">Name</span>
           <span slot="tags" slot-scope="tags">
             <a-tag
@@ -24,18 +23,14 @@
             <a>{{ record.name }}</a>
             <a-divider type="vertical" />
             <a>Delete</a>
-            <a-divider type="vertical" />
-            <a class="ant-dropdown-link">
-              More actions <a-icon type="down" />
-            </a>
           </span>
         </a-table>
       </a-tab-pane>
       <a-tab-pane key="2" tab="模板管理">
-        Content of Tab Pane 2
+        模板管理
       </a-tab-pane>
       <a-tab-pane key="3" tab="实例管理">
-        Content of Tab Pane 3
+        实例管理
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -45,8 +40,7 @@ const columns = [
   {
     dataIndex: "name",
     key: "name",
-    slots: { title: "customTitle" },
-    scopedSlots: { customRender: "name" }
+    slots: { title: "customTitle" }
   },
   {
     title: "Age",

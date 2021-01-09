@@ -22,7 +22,11 @@
               v-for="subPro in pro.children"
               :key="subPro.id"
             >
-              <icon-font :type="subPro.proIcon" style="font-size: 64px" />
+              <icon-font
+                class="icon-hover"
+                :type="subPro.proIcon"
+                style="font-size: 64px"
+              />
               <p class="space-p">{{ subPro.proChName }}</p>
             </div>
             <div class="pro-card-space">
@@ -94,5 +98,11 @@ export default {
 }
 .add-pro-header:hover {
   cursor: pointer;
+}
+.icon-hover:hover {
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+    0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
 }
 </style>

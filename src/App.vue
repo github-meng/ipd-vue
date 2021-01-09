@@ -14,4 +14,7 @@
 .align-right {
   text-align: right;
 }
+.p-16 {
+  padding: 16px;
+}
 </style>

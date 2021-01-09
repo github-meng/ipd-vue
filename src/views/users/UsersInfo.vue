@@ -1,29 +1,38 @@
 <template>
   <div>
-    <a-tabs default-active-key="1" tabPosition="left" @change="callback">
-      <a-tab-pane key="1" tab="用户管理">
-        <a-table
-          class="ipd-user-table"
-          size="middle"
-          :columns="columns"
-          :data-source="data"
-          :pagination="{ pageSize: 10 }"
-        >
-          <a-tag color="blue" slot="action" slot-scope="">
-            <a-icon type="edit" />&nbsp;
-            <a href="javascript:;">修改</a>
-          </a-tag>
-          <a-tag color="red" slot="action" slot-scope="">
-            <a-icon type="delete" />&nbsp;
-            <a href="javascript:;">删除</a>
-          </a-tag>
-        </a-table>
+    <a-tabs default-active-key="1" @change="callback">
+      <a-tab-pane key="1">
+        <span slot="tab">
+          <a-icon type="user-add" />
+          用户管理
+        </span>
+        <div class="p-16">
+          <a-table
+            class="ipd-user-table"
+            size="middle"
+            :columns="columns"
+            :data-source="data"
+            :pagination="{ pageSize: 10 }"
+          >
+            <a-tag color="blue" slot="action" slot-scope="">
+              <a-icon type="edit" />&nbsp;
+              <a href="javascript:;">修改</a>
+            </a-tag>
+            <a-tag color="red" slot="action" slot-scope="">
+              <a-icon type="delete" />&nbsp;
+              <a href="javascript:;">删除</a>
+            </a-tag>
+          </a-table>
+        </div>
       </a-tab-pane>
-      <a-tab-pane key="2" tab="分组管理">
-        Content of Tab Pane 2
-      </a-tab-pane>
-      <a-tab-pane key="3" tab="权限管理">
-        Content of Tab Pane 3
+      <a-tab-pane key="2">
+        <span slot="tab">
+          <a-icon type="usergroup-add" />
+          分组管理
+        </span>
+        <div class="p-16">
+          分组管理
+        </div>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -91,9 +100,12 @@ export default {
   height: calc(100vh - 80px);
   overflow: auto;
   border-radius: 2px;
-  .ant-tabs-left-content {
-    padding: 16px;
-    border-left: 0;
+  // .ant-tabs-left-content {
+  //   padding: 16px;
+  //   border-left: 0;
+  // }
+  .ant-tabs-bar {
+    margin: 0;
   }
 }
 .ipd-user-table {
