@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { getLogin } from "@/api/apis";
+import { getLoginData } from "@/api/apis";
 // import { setToken } from "@/cookies/cookie";
 import router from "@/router/index";
 
@@ -90,9 +90,11 @@ export default {
           var self = this;
           const userName = values.username.trim(); // 处理用户名首尾的空格
           values.username = userName;
-          getLogin(values)
+          getLoginData(values)
             .then(result => {
+              console.log("=======", result);
               if (result.code == "200") {
+                console.log(result);
                 // self.$store.dispatch("saveToken", result.data.token); // 调用store中actions事件,异步操作
                 // setToken(result.data.token); // 保存token到cookie中
                 self.$store.commit("SET_TOKEN", result.data.token); // 调用store中mutations事件,同步操作

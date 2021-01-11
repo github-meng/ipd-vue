@@ -1,12 +1,15 @@
-import { fetch } from "./fetch";
+// import { fetch } from "./fetch";
 import { post, get } from "./http";
 
 // 本地mock数据，在public文件夹>mock
-export function getUserData() {
-  return fetch({
-    url: "/api/user.json",
-    methoh: "get"
-  });
+export function getLoginData(params) {
+  if (params.username == "admin" && params.password == "ipd_vue") {
+    return get("/mock/login_a.json");
+  } else if (params.username == "user" && params.password == "ipd_vue") {
+    return get("/mock/login_u.json");
+  } else {
+    return get("/mock/login_err.json");
+  }
 }
 
 // fastmock在线平台模拟接口

@@ -1,0 +1,14 @@
+{
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "id": "307",
+    "role": "ordinary",
+    "username": "用戶001",
+    "password": "ipd_vue",
+    "userimage": "@/assets/user.png",
+    "phone": "18977153852",
+    "email": "2234526190@qq.com",
+    "token": "ded693405194bd811d9dde0e3cf270e8"
+  }
+}
