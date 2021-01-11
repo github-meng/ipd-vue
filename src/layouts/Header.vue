@@ -2,7 +2,15 @@
   <div class="header">
     <a-dropdown v-model="visible" class="ant-dropdown-user">
       <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-        <a-avatar class="dropdown-avatar" :src="userimage" alt="头像" />
+        <a-avatar
+          class="dropdown-avatar"
+          :src="
+            require(role == 'admin'
+              ? '@/assets/admin.png'
+              : '@/assets/user.png')
+          "
+          alt="头像"
+        />
         {{ username }}
         <a-icon type="down" />
       </a>
@@ -126,6 +134,9 @@ export default {
     },
     userimage() {
       return this.$store.getters.getterUserImage;
+    },
+    role() {
+      return this.$store.getters.getterUserRole;
     }
   },
   methods: {
