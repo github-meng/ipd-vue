@@ -44,25 +44,32 @@
 <script>
 import { getWorkbenchLists } from "@/api/apis";
 export default {
-  created() {
-    getWorkbenchLists(this.selectTab)
-      .then(res => {
-        if (res.code === "200") {
-          this.workLists = res.data;
-          this.myTagNum = res.data.wbLists.length;
-          this.myFinishNum = res.data.finishTotal;
-          this.loading = false;
-        }
-      })
-      .catch(err => console.log(err));
-  },
   data() {
     return {
+      timer: "",
       workLists: {},
       myTagNum: 0,
       myFinishNum: 0,
       loading: true
     };
+  },
+  mounted() {
+    //定时器
+    this.timer = setTimeout(() => {
+      getWorkbenchLists()
+        .then(res => {
+          if (res.code == "200") {
+            this.workLists = res.data;
+            this.myTagNum = res.data.wbLists.length;
+            this.myFinishNum = res.data.finishTotal;
+          }
+        })
+        .catch(err => console.log(err));
+      this.loading = false; //加载骨架屏
+    }, 1500);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   methods: {
     goToHome() {

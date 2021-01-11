@@ -5,10 +5,12 @@
         <div class="ipd-prj-left">
           <a-input-search
             style="padding: 8px;"
-            placeholder="Search"
+            placeholder="搜索流程名称"
             @change="onChange"
           />
-
+          <div class="example" v-if="loading">
+            <a-spin tip="Loading..." />
+          </div>
           <a-tree
             class="ipd-tree"
             :expanded-keys="expandedKeys"
@@ -102,14 +104,17 @@
                       v-for="(item, index) in infoLeftLists"
                       :key="index"
                     >
-                      <a-list-item class="info-list-item">
+                      <a-list-item
+                        class="info-list-item"
+                        v-if="index < infoLeftLists.length - 1"
+                      >
                         <p class="info-p">{{ item.key }}</p>
                         <p class="info-p">{{ item.value }}</p>
                       </a-list-item>
-                      <!-- <a-list-item class="info-list-item" v-else>
+                      <a-list-item class="info-last-item" v-else>
                         <p class="info-p">{{ item.key }}</p>
                         <p class="info-p">{{ item.value }}</p>
-                      </a-list-item> -->
+                      </a-list-item>
                     </transition>
                   </a-list>
                   <a-button
@@ -227,40 +232,14 @@
 <script>
 import { getCardLists } from "@/api/apis";
 import PanelModal from "@/components/PanelModal.vue";
-const x = 3;
-const y = 2;
-const z = 1;
 const gData = [];
-
-const generateData = (_level, _preKey, _tns) => {
-  const preKey = _preKey || "0";
-  const tns = _tns || gData;
-
-  const children = [];
-  for (let i = 0; i < x; i++) {
-    const key = `${preKey}-${i}`;
-    tns.push({ title: key, key, scopedSlots: { title: "title" } });
-    if (i < y) {
-      children.push(key);
-    }
-  }
-  if (_level < 0) {
-    return tns;
-  }
-  const level = _level - 1;
-  children.forEach((key, index) => {
-    tns[index].children = [];
-    return generateData(level, key, tns[index].children);
-  });
-};
-generateData(z);
 
 const dataList = [];
 const generateList = data => {
   for (let i = 0; i < data.length; i++) {
     const node = data[i];
     const key = node.key;
-    dataList.push({ key, title: key });
+    dataList.push({ key, title: node.title });
     if (node.children) {
       generateList(node.children);
     }
@@ -284,20 +263,9 @@ const getParentKey = (key, tree) => {
 };
 export default {
   components: { PanelModal },
-  created() {
-    getCardLists()
-      .then(res => {
-        if (res.code == "200") {
-          this.cardLists = res.data.homePanel.list;
-          this.infoLeftLists = res.data.homeInfo.list;
-          this.infoRightLists = res.data.homeInfo.chart;
-          this.loading = false;
-        }
-      })
-      .catch(err => console.log(err));
-  },
   data() {
     return {
+      timer: "",
       selectTab: "panel",
       loading: true,
       cardLists: [],
@@ -312,6 +280,88 @@ export default {
       gData,
       dataToChild: new Object()
     };
+  },
+  mounted() {
+    //定时器
+    this.timer = setTimeout(() => {
+      getCardLists()
+        .then(res => {
+          if (res.code == "200") {
+            this.cardLists = res.data.homePanel.list;
+            this.infoLeftLists = res.data.homeInfo.list;
+            this.infoRightLists = res.data.homeInfo.chart;
+            this.docLists = res.data.homeDoc;
+            this.gData = [
+              {
+                children: [
+                  {
+                    key: "0-0-0",
+                    scopedSlots: { title: "title" },
+                    title: "测试培训流程001"
+                  },
+                  {
+                    key: "0-0-1",
+                    scopedSlots: { title: "title" },
+                    title: "测试培训流程002"
+                  },
+                  {
+                    key: "0-0-2",
+                    scopedSlots: { title: "title" },
+                    title: "测试培训流程003"
+                  }
+                ],
+                key: "0-0",
+                scopedSlots: { title: "title" },
+                title: "培训流程"
+              },
+              {
+                children: [
+                  {
+                    key: "0-1-0",
+                    scopedSlots: { title: "title" },
+                    title: "测试研发流程004"
+                  },
+                  {
+                    key: "0-1-1",
+                    scopedSlots: { title: "title" },
+                    title: "测试研发流程005"
+                  },
+                  {
+                    key: "0-1-2",
+                    scopedSlots: { title: "title" },
+                    title: "测试研发流程006"
+                  }
+                ],
+                key: "0-1",
+                scopedSlots: { title: "title" },
+                title: "研发流程"
+              },
+              {
+                children: [
+                  {
+                    key: "0-2-0",
+                    scopedSlots: { title: "title" },
+                    title: "测试其他流程007"
+                  },
+                  {
+                    key: "0-2-1",
+                    scopedSlots: { title: "title" },
+                    title: "测试其他流程008"
+                  }
+                ],
+                key: "0-2",
+                scopedSlots: { title: "title" },
+                title: "其他流程"
+              }
+            ];
+          }
+        })
+        .catch(err => console.log(err));
+      this.loading = false; //加载骨架屏
+    }, 1500);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   methods: {
     toPanelFn(item) {
@@ -560,14 +610,7 @@ export default {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(24, 144, 255, 0.3);
 }
-// loading...
-.example {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 // common css
 .flex {
   display: flex;
@@ -656,6 +699,7 @@ p {
         line-height: 32px;
         font-weight: normal;
         color: #000000a6;
+        white-space: nowrap;
       }
       span.info-htime {
         font-size: 12px;

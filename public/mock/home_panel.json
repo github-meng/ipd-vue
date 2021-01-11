@@ -4,10 +4,12 @@
     "data": {
         "pageSize": 10,
         "homePanel": {
-            "list": [{
+            "list": [
+                {
                     "id": 1,
                     "title": "项目计划",
-                    "subLists": [{
+                    "subLists": [
+                        {
                             "id": 11,
                             "pTitle": "项目计划",
                             "name": "项目需求",
@@ -44,7 +46,8 @@
                 {
                     "id": 2,
                     "title": "项目采购",
-                    "subLists": [{
+                    "subLists": [
+                        {
                             "id": 21,
                             "pTitle": "项目采购",
                             "name": "物料采购",
@@ -65,47 +68,54 @@
                 {
                     "id": 3,
                     "title": "项目开发",
-                    "subLists": [{
-                        "id": 31,
-                        "pTitle": "项目开发",
-                        "name": "UI设计",
-                        "assignee": "郭靖",
-                        "descript": "描述一下UI设计的构图思路，模仿业界优秀设计",
-                        "startTime": "2021-02-02 09:00:00"
-                    }, {
-                        "id": 32,
-                        "pTitle": "项目开发",
-                        "name": "交互设计",
-                        "assignee": "黄蓉",
-                        "descript": "描述一下用户交互设计，模仿业界优秀交互体验设计",
-                        "startTime": "2021-02-03 09:00:00"
-                    }, {
-                        "id": 33,
-                        "pTitle": "项目开发",
-                        "name": "前端开发",
-                        "assignee": "杨过",
-                        "descript": "描述一下前端开发框架设计思路，选择合适的框架和工具库，如Vue/Angular/react",
-                        "startTime": "2021-02-04 09:00:00"
-                    }, {
-                        "id": 34,
-                        "pTitle": "项目开发",
-                        "name": "后端开发",
-                        "assignee": "小龙女",
-                        "descript": "描述一下后端开发思路，构建服务器端语言，使用怎么数据相关工具和版本控制工具",
-                        "startTime": "2021-02-05 09:00:00"
-                    }, {
-                        "id": 35,
-                        "pTitle": "项目开发",
-                        "name": "数据库运维",
-                        "assignee": "金轮法王",
-                        "descript": "描述一下运维工作，根据应用访问情况做适当优化，比如db2里的日志文件数量、缓冲池大小、索引等",
-                        "startTime": "2021-02-06 08:00:00"
-                    }]
+                    "subLists": [
+                        {
+                            "id": 31,
+                            "pTitle": "项目开发",
+                            "name": "UI设计",
+                            "assignee": "郭靖",
+                            "descript": "描述一下UI设计的构图思路，模仿业界优秀设计",
+                            "startTime": "2021-02-02 09:00:00"
+                        },
+                        {
+                            "id": 32,
+                            "pTitle": "项目开发",
+                            "name": "交互设计",
+                            "assignee": "黄蓉",
+                            "descript": "描述一下用户交互设计，模仿业界优秀交互体验设计",
+                            "startTime": "2021-02-03 09:00:00"
+                        },
+                        {
+                            "id": 33,
+                            "pTitle": "项目开发",
+                            "name": "前端开发",
+                            "assignee": "杨过",
+                            "descript": "描述一下前端开发框架设计思路，选择合适的框架和工具库，如Vue/Angular/react",
+                            "startTime": "2021-02-04 09:00:00"
+                        },
+                        {
+                            "id": 34,
+                            "pTitle": "项目开发",
+                            "name": "后端开发",
+                            "assignee": "小龙女",
+                            "descript": "描述一下后端开发思路，构建服务器端语言，使用怎么数据相关工具和版本控制工具",
+                            "startTime": "2021-02-05 09:00:00"
+                        },
+                        {
+                            "id": 35,
+                            "pTitle": "项目开发",
+                            "name": "数据库运维",
+                            "assignee": "金轮法王",
+                            "descript": "描述一下运维工作，根据应用访问情况做适当优化，比如db2里的日志文件数量、缓冲池大小、索引等",
+                            "startTime": "2021-02-06 08:00:00"
+                        }
+                    ]
                 },
                 {
                     "id": 4,
                     "title": "项目测试",
-                    "subLists": [{
+                    "subLists": [
+                        {
                             "id": 41,
                             "pTitle": "项目测试",
                             "name": "软件测试",
@@ -126,7 +136,8 @@
             ]
         },
         "homeInfo": {
-            "list": [{
+            "list": [
+                {
                     "key": "流程编号",
                     "value": "dsfg786-ds9f0vb9-df0yu99"
                 },
@@ -167,7 +178,8 @@
                     "value": "项目说明书怎么写？项目说明书对于一个项目的重要性不言而喻，在项目实施过程中有很重要的参考价值，所以做项目必须要学会写项目说明书。真正写好一份项目说明书并不简单，细分起来就有项目情况说明书、项目范围说明书、项目需求说明书等等。"
                 }
             ],
-            "chart": [{
+            "chart": [
+                {
                     "id": 1,
                     "assignee": "断浪",
                     "creatTime": "2020-12-12 01:00:00",
@@ -210,6 +222,128 @@
                     "content": "[捂脸]..."
                 }
             ]
-        }
+        },
+        "homeDoc": [
+            {
+                "id": 101,
+                "className": "项目计划",
+                "classFile": [
+                    {
+                        "id": 1011,
+                        "inFileName": "项目计划书001",
+                        "fileName": "XXX项目计划书.txt",
+                        "fileSize": "123",
+                        "fileIcon": "file-text",
+                        "fileColor": "#515151"
+                    },
+                    {
+                        "id": 1012,
+                        "inFileName": "项目计划书002",
+                        "fileName": "XXX项目计划书.pdf",
+                        "fileSize": "456",
+                        "fileIcon": "file-pdf",
+                        "fileColor": "#ff5562"
+                    },
+                    {
+                        "id": 1013,
+                        "inFileName": "项目计划书003",
+                        "fileName": "XXX项目计划书.doc",
+                        "fileSize": "147",
+                        "fileIcon": "file-word",
+                        "fileColor": "#55a0ff"
+                    }
+                ]
+            },
+            {
+                "id": 102,
+                "className": "项目采购",
+                "classFile": [
+                    {
+                        "id": 1021,
+                        "inFileName": "项目采购001",
+                        "fileName": "****项目采购书.xls",
+                        "fileSize": "258",
+                        "fileIcon": "file-excel",
+                        "fileColor": "#5bcb9a"
+                    },
+                    {
+                        "id": 1022,
+                        "inFileName": "项目采购002",
+                        "fileName": "****项目采购书.xls",
+                        "fileSize": "369",
+                        "fileIcon": "file-excel",
+                        "fileColor": "#5bcb9a"
+                    }
+                ]
+            },
+            {
+                "id": 103,
+                "className": "项目开发",
+                "classFile": [
+                    {
+                        "id": 1031,
+                        "inFileName": "项目开发001",
+                        "fileName": "***项目开发书.txt",
+                        "fileSize": "321",
+                        "fileIcon": "file-text",
+                        "fileColor": "#515151"
+                    },
+                    {
+                        "id": 1032,
+                        "inFileName": "项目开发002",
+                        "fileName": "***项目开发书.pdf",
+                        "fileSize": "654",
+                        "fileIcon": "file-pdf",
+                        "fileColor": "#ff5562"
+                    },
+                    {
+                        "id": 1033,
+                        "inFileName": "项目开发003",
+                        "fileName": "***项目开发书.doc",
+                        "fileSize": "345",
+                        "fileIcon": "file-word",
+                        "fileColor": "#55a0ff"
+                    },
+                    {
+                        "id": 1034,
+                        "inFileName": "项目开发004",
+                        "fileName": "***项目开发书.xls",
+                        "fileSize": "567",
+                        "fileIcon": "file-excel",
+                        "fileColor": "#5bcb9a"
+                    },
+                    {
+                        "id": 1035,
+                        "inFileName": "项目开发005",
+                        "fileName": "***项目开发书.jpg",
+                        "fileSize": "789",
+                        "fileIcon": "file-image",
+                        "fileColor": "#f9ca07"
+                    }
+                ]
+            },
+            {
+                "id": 104,
+                "className": "项目测试",
+                "classFile": [
+                    {
+                        "id": 1041,
+                        "inFileName": "项目测试001",
+                        "fileName": "*****项目测试.doc",
+                        "fileSize": "234",
+                        "fileIcon": "file-word",
+                        "fileColor": "#55a0ff"
+                    },
+                    {
+                        "id": 1042,
+                        "inFileName": "项目测试002",
+                        "fileName": "*****项目测试.txt",
+                        "fileSize": "99",
+                        "fileIcon": "file-text",
+                        "fileColor": "#515151"
+                    }
+                ]
+            }
+        ]
     }
 }

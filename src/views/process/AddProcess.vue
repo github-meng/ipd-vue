@@ -1,8 +1,10 @@
 <template>
   <div id="ipd-process">
+    <div class="example" v-if="loading">
+      <a-spin tip="Loading..." />
+    </div>
     <a-card
       :bordered="false"
-      :loading="loading"
       class="pro-card"
       v-for="pro in processLists"
       :key="pro.id"
@@ -49,28 +51,38 @@
 import { getProcessLists } from "@/api/apis";
 export default {
   name: "ipdProcess",
-  created() {
-    getProcessLists(this.selectTab)
-      .then(res => {
-        if (res.code === "200") {
-          this.processLists = res.data;
-          this.loading = false;
-        }
-      })
-      .catch(err => console.log(err));
-  },
   data() {
     return {
+      timer: "",
       processLists: [],
       loading: true,
       customStyle: "background: #ffffff;border: 0;overflow: hidden"
     };
+  },
+  mounted() {
+    //定时器
+    this.timer = setTimeout(() => {
+      getProcessLists()
+        .then(res => {
+          if (res.code == "200") {
+            this.processLists = res.data;
+          }
+        })
+        .catch(err => console.log(err));
+      this.loading = false; //加载骨架屏
+    }, 1500);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+#ipd-process {
+  height: 100%;
+}
 .pro-card {
   /deep/.ant-card-body {
     padding: 0;

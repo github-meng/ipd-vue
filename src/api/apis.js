@@ -12,16 +12,13 @@ export function getLoginData(params) {
   }
 }
 export function getCardLists() {
-  return get("/mock/home_panel.json");
-  // if (params == "panel") {
-  //   return get("/mock/home_panel.json");
-  // } else if (params == "info") {
-  //   return get("/mock/home_panel.json");
-  // } else if (params == "doc") {
-  //   return get("/mock/home_panel.json");
-  // } else {
-  //   return get("/mock/home_panel.json");
-  // }
+  return get("/mock/home.json");
+}
+export function getWorkbenchLists() {
+  return get("/mock/workbench.json");
+}
+export function getProcessLists() {
+  return get("/mock/process.json");
 }
 
 // fastmock在线平台模拟接口
@@ -58,11 +55,11 @@ export function getPanelDetailLists() {
 }
 
 //获取workbench页工作台数据
-export function getWorkbenchLists() {
-  return get("/api/workbench");
-}
+// export function getWorkbenchLists() {
+//   return get("/api/workbench");
+// }
 
 //获取process页新建流程数据
-export function getProcessLists() {
-  return get("/api/process");
-}
+// export function getProcessLists() {
+//   return get("/api/process");
+// }
