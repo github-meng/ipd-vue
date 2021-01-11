@@ -102,17 +102,14 @@
                       v-for="(item, index) in infoLeftLists"
                       :key="index"
                     >
-                      <a-list-item
-                        class="info-list-item"
-                        v-if="index < infoLeftLists.length - 1"
-                      >
+                      <a-list-item class="info-list-item">
                         <p class="info-p">{{ item.key }}</p>
                         <p class="info-p">{{ item.value }}</p>
                       </a-list-item>
-                      <a-list-item class="info-last-item" v-else>
+                      <!-- <a-list-item class="info-list-item" v-else>
                         <p class="info-p">{{ item.key }}</p>
                         <p class="info-p">{{ item.value }}</p>
-                      </a-list-item>
+                      </a-list-item> -->
                     </transition>
                   </a-list>
                   <a-button
@@ -136,7 +133,7 @@
                       <div class="info-tline-header">
                         <a-avatar
                           :size="32"
-                          :src="line.userimage"
+                          :src="require('@/assets/user-logo.png')"
                           style="flex: 0 0 32px;"
                         />
                         <p>{{ line.assignee }}</p>
@@ -288,10 +285,12 @@ const getParentKey = (key, tree) => {
 export default {
   components: { PanelModal },
   created() {
-    getCardLists(this.selectTab)
+    getCardLists()
       .then(res => {
-        if (res.code === "200") {
-          this.cardLists = res.data.list;
+        if (res.code == "200") {
+          this.cardLists = res.data.homePanel.list;
+          this.infoLeftLists = res.data.homeInfo.list;
+          this.infoRightLists = res.data.homeInfo.chart;
           this.loading = false;
         }
       })
@@ -341,48 +340,51 @@ export default {
     },
     handleSizeChange(e) {
       this.selectTab = e.target.value;
-      if (this.selectTab == "panel") {
-        if (this.cardLists && this.cardLists.length > 0) {
-          return;
-        }
-      } else if (this.selectTab == "info") {
-        if (this.infoLeftLists && this.infoLeftLists.length > 0) {
-          return;
-        }
-      } else if (this.selectTab == "doc") {
-        if (this.docLists && this.docLists.length > 0) {
-          return;
-        }
-      }
-      this.getInfoMsg(this.selectTab);
-    },
-    getInfoMsg(param) {
-      this.loading = true;
-      getCardLists(param)
-        .then(res => {
-          if (res.code === "200") {
-            switch (this.selectTab) {
-              case "panel":
-                this.cardLists = res.data.list;
-                break;
-              case "info":
-                this.infoLeftLists = res.data.list;
-                this.infoRightLists = res.data.chart;
-                break;
-              case "doc":
-                this.docLists = res.data;
-                break;
-              case "pro":
-                break;
-              default:
-                this.cardLists = res.data.list;
-            }
-
-            this.loading = false;
-          }
-        })
-        .catch(err => console.log(err));
+      // if (this.selectTab == "panel") {
+      //   if (this.cardLists && this.cardLists.length > 0) {
+      //     this.loading = false;
+      //     return;
+      //   }
+      // } else if (this.selectTab == "info") {
+      //   if (this.infoLeftLists && this.infoLeftLists.length > 0) {
+      //     this.loading = false;
+      //     return;
+      //   }
+      // } else if (this.selectTab == "doc") {
+      //   if (this.docLists && this.docLists.length > 0) {
+      //     this.loading = false;
+      //     return;
+      //   }
+      // }
+      // this.getInfoMsg(this.selectTab);
     }
+    // getInfoMsg(selectTab) {
+    // this.loading = true;
+    // getCardLists()
+    //   .then(res => {
+    //     if (res.code === "200") {
+    //       switch (selectTab) {
+    //         case "panel":
+    //           this.cardLists = res.data.homePanel.list;
+    //           break;
+    //         case "info":
+    //           this.infoLeftLists = res.data.homeInfo.list;
+    //           this.infoRightLists = res.data.homeInfo.chart;
+    //           break;
+    //         case "doc":
+    //           this.docLists = res.data;
+    //           break;
+    //         case "pro":
+    //           break;
+    //         default:
+    //           this.cardLists = res.data.list;
+    //       }
+
+    //       this.loading = false;
+    //     }
+    //   })
+    //   .catch(err => console.log(err));
+    // }
   }
 };
 </script>
@@ -594,8 +596,10 @@ p {
     margin: 0;
     &:first-child {
       width: 35%;
-      text-align: left;
-      text-indent: 14px;
+      text-align: right;
+      padding-right: 14px;
+      font-size: 13px;
+      font-weight: 600;
     }
     &:last-child {
       width: 65%;
@@ -621,9 +625,12 @@ p {
     align-items: normal;
     p {
       &:first-child {
-        text-align: left;
-        text-indent: 14px;
+        width: 35%;
+        text-align: right;
+        padding-right: 14px;
         padding-bottom: 6px;
+        font-size: 13px;
+        font-weight: 600;
       }
       &:last-child {
         margin: 0;

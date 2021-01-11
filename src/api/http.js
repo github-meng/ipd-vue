@@ -13,7 +13,7 @@ Axios.interceptors.request.use(
         Authorization: token // 让每个请求携带token
       };
     }
-    console.log("request拦截器=", config);
+    // console.log("request拦截器=", config);
     return config;
   },
   error => {
@@ -32,7 +32,7 @@ Axios.interceptors.response.use(
     //     });
     //   }, 3500);
     // }
-    console.log("response拦截器=", response);
+    // console.log("response拦截器=", response);
     return response;
   },
   error => {
