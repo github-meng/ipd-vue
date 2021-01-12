@@ -63,7 +63,7 @@
       </a-badge>
     </div>
     <a-drawer
-      :title="'讨论区'"
+      :title="'流程分组区'"
       placement="right"
       width="300"
       :closable="true"
@@ -75,8 +75,10 @@
       <a-list item-layout="horizontal" :data-source="data">
         <a-list-item slot="renderItem" slot-scope="item">
           <a-list-item-meta :description="item.description">
-            <a slot="title" href="javascript:;">
-              {{ item.title }} <sub class="sub">{{ item.createTime }}</sub>
+            <a slot="title" href="javascript:;" @click="showChildrenDrawer">
+              <a-badge color="#f50" />
+              {{ item.title }}
+              <sub class="sub">{{ item.createTime }}</sub>
             </a>
             <div
               slot="avatar"
@@ -92,6 +94,15 @@
           </a-list-item-meta>
         </a-list-item>
       </a-list>
+      <a-drawer
+        title="交流讨论区"
+        width="320"
+        :closable="true"
+        :visible="childrenDrawer"
+        @close="onChildrenDrawerClose"
+      >
+        <div>这是聊天区</div>
+      </a-drawer>
       <div class="mentions-box">
         <a-mentions
           class="mentions"
@@ -129,6 +140,7 @@ export default {
     const data = [];
     return {
       visible: false,
+      childrenDrawer: false,
       visibleDrawer: false,
       newsVisible: false,
       value: "",
@@ -185,6 +197,12 @@ export default {
     },
     newsDropdown() {
       this.newsVisible = !this.newsVisible;
+    },
+    showChildrenDrawer() {
+      this.childrenDrawer = true;
+    },
+    onChildrenDrawerClose() {
+      this.childrenDrawer = false;
     },
     handleMenuClick() {
       this.visible = false;

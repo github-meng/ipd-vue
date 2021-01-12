@@ -57,20 +57,6 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "home" */ "../views/home/Home.vue")
       },
-      // workbench
-      {
-        path: "/workbench",
-        name: "工作台",
-        meta: {
-          icon: "profile",
-          needLogin: true,
-          authority: ["admin", "ordinary"]
-        },
-        component: () =>
-          import(
-            /* webpackChunkName: "workbench" */ "../views/workbench/Workbench.vue"
-          )
-      },
       // process
       {
         path: "/process",
@@ -85,10 +71,24 @@ const routes = [
             /* webpackChunkName: "process" */ "../views/process/AddProcess.vue"
           )
       },
+      // workbench
+      {
+        path: "/workbench",
+        name: "工作台",
+        meta: {
+          icon: "profile",
+          needLogin: true,
+          authority: ["admin", "ordinary"]
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "workbench" */ "../views/workbench/Workbench.vue"
+          )
+      },
       // repository
       {
         path: "/repository",
-        name: "知识库",
+        name: "文件库",
         meta: {
           icon: "wallet",
           needLogin: true,
