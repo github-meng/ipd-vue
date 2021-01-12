@@ -390,51 +390,7 @@ export default {
     },
     handleSizeChange(e) {
       this.selectTab = e.target.value;
-      // if (this.selectTab == "panel") {
-      //   if (this.cardLists && this.cardLists.length > 0) {
-      //     this.loading = false;
-      //     return;
-      //   }
-      // } else if (this.selectTab == "info") {
-      //   if (this.infoLeftLists && this.infoLeftLists.length > 0) {
-      //     this.loading = false;
-      //     return;
-      //   }
-      // } else if (this.selectTab == "doc") {
-      //   if (this.docLists && this.docLists.length > 0) {
-      //     this.loading = false;
-      //     return;
-      //   }
-      // }
-      // this.getInfoMsg(this.selectTab);
     }
-    // getInfoMsg(selectTab) {
-    // this.loading = true;
-    // getCardLists()
-    //   .then(res => {
-    //     if (res.code === "200") {
-    //       switch (selectTab) {
-    //         case "panel":
-    //           this.cardLists = res.data.homePanel.list;
-    //           break;
-    //         case "info":
-    //           this.infoLeftLists = res.data.homeInfo.list;
-    //           this.infoRightLists = res.data.homeInfo.chart;
-    //           break;
-    //         case "doc":
-    //           this.docLists = res.data;
-    //           break;
-    //         case "pro":
-    //           break;
-    //         default:
-    //           this.cardLists = res.data.list;
-    //       }
-
-    //       this.loading = false;
-    //     }
-    //   })
-    //   .catch(err => console.log(err));
-    // }
   }
 };
 </script>

@@ -65,31 +65,34 @@
     <a-drawer
       :title="'讨论区'"
       placement="right"
+      width="300"
       :closable="true"
       :keyboard="true"
       :visible="visibleDrawer"
       :get-container="false"
       @close="onClose"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <div
-        :style="{
-          position: 'absolute',
-          bottom: 0,
-          width: '100%',
-          borderTop: '1px solid #e8e8e8',
-          padding: '10px 16px',
-          left: 0,
-          background: '#fff',
-          borderRadius: '0 0 4px 4px',
-          display: 'flex',
-          flex: '1 1 0%'
-        }"
-      >
+      <a-list item-layout="horizontal" :data-source="data">
+        <a-list-item slot="renderItem" slot-scope="item">
+          <a-list-item-meta :description="item.description">
+            <a slot="title" href="javascript:;">
+              {{ item.title }} <sub class="sub">{{ item.createTime }}</sub>
+            </a>
+            <div
+              slot="avatar"
+              class="avt-box"
+              v-for="(avt, index) in item.avatar"
+              :key="index"
+            >
+              <a-avatar :src="avt.img" />
+            </div>
+            <span slot="avatar" class="avt-tips">
+              ...等{{ item.avatar.length }}人
+            </span>
+          </a-list-item-meta>
+        </a-list-item>
+      </a-list>
+      <div class="mentions-box">
         <a-mentions
           class="mentions"
           v-model="value"
@@ -118,15 +121,32 @@
 // import { Icon } from "ant-design-vue";
 // import { removeToken } from "@/cookies/cookie";
 import router from "@/router/index";
-
+import Mock from "mockjs";
+const Random = Mock.Random;
+const mockArrLength = Random.integer(1, 10);
 export default {
   data() {
+    const data = [];
     return {
       visible: false,
       visibleDrawer: false,
       newsVisible: false,
-      value: ""
+      value: "",
+      data
     };
+  },
+  created() {
+    for (let index = 0; index < mockArrLength; index++) {
+      this.data.push(
+        Mock.mock({
+          title: Random.ctitle(),
+          name: Random.cname(),
+          avatar: this.getDynamicImg(),
+          description: Random.cparagraph(1),
+          createTime: Random.datetime()
+        })
+      );
+    }
   },
   computed: {
     username() {
@@ -140,6 +160,17 @@ export default {
     }
   },
   methods: {
+    // mock动态获取用户头像
+    getDynamicImg() {
+      const newImg = [];
+      const newImgNum = Random.integer(2, 10);
+      for (let j = 0; j < newImgNum; j++) {
+        newImg.push({
+          img: Random.image("32x32", Random.color(), "User@increment")
+        });
+      }
+      return newImg;
+    },
     onSelect(option) {
       console.log("select", option);
     },
@@ -230,14 +261,31 @@ export default {
   color: #333333;
 }
 
-.mentions {
-  border-radius: 0;
+.mentions-box {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 54px;
+  border-top: 1px solid #e8e8e8;
+  padding: 10px 16px;
+  left: 0;
+  background: #ffffff;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  flex: 1 1 0%;
+  .mentions {
+    border-radius: 0;
+    height: 34px;
+  }
 }
-
+/deep/.ant-mentions > textarea {
+  padding: 5px 10px;
+}
 .mentions-btn {
   border-radius: 0;
   padding: 0 6px;
   font-size: 18px;
+  height: 34px;
 }
 
 .tabs-news {
@@ -247,5 +295,43 @@ export default {
 
 .menu-tabs > .ant-dropdown-menu-item:hover {
   background-color: transparent;
+}
+
+/deep/.ant-drawer-content {
+  .ant-drawer-header {
+    height: 54px;
+  }
+  .ant-drawer-body {
+    padding: 8px;
+    height: calc(100vh - 108px);
+    overflow: auto;
+  }
+  .ant-list-item-meta {
+    align-items: end;
+    flex-flow: column-reverse;
+    .ant-list-item-meta-avatar {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      .avt-box {
+        margin-left: -16px;
+        &:first-child {
+          margin-left: 0;
+        }
+        .ant-avatar-image:hover {
+          box-shadow: 0 0 3px #333;
+        }
+      }
+      .avt-tips {
+        font-size: 12px;
+        color: #999;
+      }
+    }
+  }
+}
+.sub {
+  color: #999;
+  font-weight: normal;
+  font-size: 12px;
 }
 </style>

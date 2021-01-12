@@ -1,0 +1,91 @@
+{
+    "code": 200,
+    "msg": "success",
+    "data": {
+        "id": "@integer(1, 500)",
+        "name": "@cword(5,20)",
+        "taskMsg": [{
+                "key": "流程编号",
+                "value": "sa89cvvz-adf65afsa6-afu8xv6xcv5",
+                "mix": 0
+            },
+            {
+                "key": "计划开始时间",
+                "value": "2021-01-11 11:00:00",
+                "mix": 0
+            },
+            {
+                "key": "任务类型",
+                "value": "少林寺",
+                "mix": 0
+            },
+            {
+                "key": "任务名称",
+                "value": "天下英雄会"
+            },
+            {
+                "key": "流程申请人",
+                "value": "燕双鹰",
+                "mix": 0
+            },
+            {
+                "key": "计划结束时间",
+                "value": "2021-02-12 13:00:00",
+                "mix": 0
+            },
+            {
+                "key": "创建时间",
+                "value": "2021-01-12 12:00:00",
+                "mix": 0
+            },
+            {
+                "key": "任务编号",
+                "value": "20201104",
+                "mix": 0
+            },
+            {
+                "key": "任务成员",
+                "value": "张三、李四、王五",
+                "mix": 1
+            },
+            {
+                "key": "任务说明",
+                "value": "@cparagraph",
+                "mix": 1
+            }
+        ],
+        "inDocLists": [{
+                "id": 110,
+                "docName": "XXX项目需求规划书-模板.doc",
+                "docClassify": "需求规划书",
+                "fileIcon": "file-word",
+                "fileColor": "#55a0ff"
+            },
+            {
+                "id": 111,
+                "docName": "XXX项目评审报告-模板.xls",
+                "docClassify": "规格评审报告",
+                "fileIcon": "file-excel",
+                "fileColor": "#5bcb9a"
+            },
+            {
+                "id": 112,
+                "docName": "XXX项目说明文本-模板.txt",
+                "docClassify": "阶段评估报告",
+                "fileIcon": "file-text",
+                "fileColor": "#515151"
+            }
+        ],
+        "outDocLists": [{
+                "id": 210,
+                "docName": "XXX项目阶段评估报告-模板.doc",
+                "docClassify": "阶段评估报告"
+            },
+            {
+                "id": 211,
+                "docName": "XXX项目阶段总结报告-模板.xls",
+                "docClassify": "阶段总结报告"
+            }
+        ]
+    }
+}

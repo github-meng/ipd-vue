@@ -20,6 +20,9 @@ export function getWorkbenchLists() {
 export function getProcessLists() {
   return get("/mock/process.json");
 }
+export function getPanelDetailLists() {
+  return get("/mock/panel_detail.json");
+}
 
 // fastmock在线平台模拟接口
 // export function getTestData() {
@@ -49,10 +52,10 @@ export function getProcessLists() {
 // }
 
 //获取home页看板detail数据
-export function getPanelDetailLists() {
-  const url = "/api/getPanelDetail";
-  return get(url);
-}
+// export function getPanelDetailLists() {
+//   const url = "/api/getPanelDetail";
+//   return get(url);
+// }
 
 //获取workbench页工作台数据
 // export function getWorkbenchLists() {

@@ -221,7 +221,7 @@ for (let i = 0; i < dataNum; i++) {
     tag: Random.ctitle(3, 10),
     type: Random.ctitle(4),
     docName: Random.ctitle(5, 15),
-    docSize: Random.natural(10, 500),
+    docSize: Random.natural(10, 500) + "k",
     createTime: Random.datetime(),
     link: Random.url()
   });

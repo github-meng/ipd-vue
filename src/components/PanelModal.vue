@@ -4,7 +4,7 @@
       :title="ModalData.pTitle"
       :width="'75%'"
       :bodyStyle="{ height: '480px', overflow: 'auto' }"
-      :dialog-style="{ top: '48px' }"
+      :dialog-style="{ top: '60px', padding: 0 }"
       :visible="visible"
       :maskClosable="false"
       :confirm-loading="confirmLoading"
@@ -198,7 +198,7 @@ export default {
       this.ModalData = newVal;
       getPanelDetailLists()
         .then(result => {
-          if (result.code === "200") {
+          if (result.code == "200") {
             this.cardGridData = result.data.taskMsg;
             this.inDocListData = result.data.inDocLists;
             this.outDocListData = result.data.outDocLists;
