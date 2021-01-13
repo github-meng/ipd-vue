@@ -108,6 +108,9 @@ p {
     }
     /deep/.ant-list-item {
       border-bottom: 1px solid #f5f5f5;
+      &:hover {
+        background-color: #e6f7ff;
+      }
     }
     /deep/.ant-list-item-meta {
       align-items: center;

@@ -5,6 +5,9 @@
 </template>
 
 <style lang="less">
+.m-0 {
+  margin: 0 !important;
+}
 .mb-1 {
   margin-bottom: 8px;
 }
@@ -16,6 +19,12 @@
 }
 .p-16 {
   padding: 16px;
+}
+.br-1 {
+  border-right: 1px solid #e8e8e8;
+}
+.bl-1 {
+  border-left: 1px solid #e8e8e8;
 }
 // loading...
 .example {

@@ -2,9 +2,9 @@
   "code": 200,
   "msg": "success",
   "data": {
-    "size": 4,
-    "total": 32,
-    "finishTotal": 28,
+    "size": 6,
+    "total": 14,
+    "finishTotal": 8,
     "wbLists": [
         {
           "id": "55",

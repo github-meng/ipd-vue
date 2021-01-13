@@ -44,12 +44,86 @@
       <a-menu slot="overlay" class="menu-tabs">
         <a-menu-item key="tabs">
           <div class="tabs-news">
-            <a-tabs default-active-key="1" :tabBarGutter="70">
+            <a-tabs default-active-key="1">
               <a-tab-pane key="1" tab="消息">
-                消息提示区
+                <a-list item-layout="horizontal" :data-source="noticesData">
+                  <div slot="footer">
+                    <a-row>
+                      <a-col :span="12" class="br-1">
+                        <a-button type="link" block class="footer-btn">
+                          清空通知
+                        </a-button>
+                      </a-col>
+                      <a-col :span="12">
+                        <a-button type="link" block class="footer-btn">
+                          查看更多
+                        </a-button>
+                      </a-col>
+                    </a-row>
+                  </div>
+                  <a-list-item slot="renderItem" slot-scope="item">
+                    <a-list-item-meta>
+                      <p slot="title" class="item-meta m-0">
+                        {{ item.projectName }}
+                        <a-divider type="vertical" />
+                        提到了你
+                      </p>
+                      <div slot="description" class="description">
+                        {{ item.noticesDes }}
+                        <br />
+                        <span>
+                          {{ item.dataTime }}
+                        </span>
+                      </div>
+                      <a-avatar
+                        slot="avatar"
+                        style="color: #f5222d; backgroundColor: #ffdcdc"
+                      >
+                        <icon-font type="icon-guangbo" />
+                      </a-avatar>
+                    </a-list-item-meta>
+                  </a-list-item>
+                </a-list>
               </a-tab-pane>
               <a-tab-pane key="2" tab="待办">
-                任务待办区
+                <a-list item-layout="horizontal" :data-source="noticesData">
+                  <div slot="footer">
+                    <a-row>
+                      <a-col :span="12" class="br-1">
+                        <a-button type="link" block class="footer-btn">
+                          清空待办
+                        </a-button>
+                      </a-col>
+                      <a-col :span="12">
+                        <a-button type="link" block class="footer-btn">
+                          查看更多
+                        </a-button>
+                      </a-col>
+                    </a-row>
+                  </div>
+                  <a-list-item slot="renderItem" slot-scope="item">
+                    <a-list-item-meta>
+                      <p slot="title" class="item-meta m-0">
+                        {{ item.projectName }}
+                        <a-divider type="vertical" />
+                        你有一个待办任务
+                      </p>
+                      <div slot="description" class="description">
+                        {{ item.noticesDes }}
+                        <br />
+                        <span>
+                          {{ item.dataTime }}
+                        </span>
+                      </div>
+                      <a-avatar
+                        slot="avatar"
+                        style="color: #f56a00; backgroundColor: #fde3cf"
+                      >
+                        <icon-font type="icon-daiban" />
+                      </a-avatar>
+                    </a-list-item-meta>
+                  </a-list-item>
+                </a-list>
               </a-tab-pane>
             </a-tabs>
           </div>
@@ -66,6 +140,7 @@
       :title="'流程分组区'"
       placement="right"
       width="300"
+      class="drawer-chart"
       :closable="true"
       :keyboard="true"
       :visible="visibleDrawer"
@@ -73,13 +148,16 @@
       @close="onClose"
     >
       <a-list item-layout="horizontal" :data-source="data">
-        <a-list-item slot="renderItem" slot-scope="item">
-          <a-list-item-meta :description="item.description">
-            <a slot="title" href="javascript:;" @click="showChildrenDrawer">
-              <a-badge color="#f50" />
+        <a-list-item slot="renderItem" slot-scope="item, index">
+          <a-list-item-meta
+            :description="item.description"
+            @click="showChildrenDrawer"
+          >
+            <p slot="title" class="m-0">
+              <a-badge :status="index > 2 ? 'default' : 'error'" />
               {{ item.title }}
               <sub class="sub">{{ item.createTime }}</sub>
-            </a>
+            </p>
             <div
               slot="avatar"
               class="avt-box"
@@ -102,28 +180,28 @@
         @close="onChildrenDrawerClose"
       >
         <div>这是聊天区</div>
+        <div class="mentions-box">
+          <a-mentions
+            class="mentions"
+            v-model="value"
+            @change="onChange"
+            @select="onSelect"
+          >
+            <a-mentions-option value="admin">
+              admin
+            </a-mentions-option>
+            <a-mentions-option value="user">
+              user
+            </a-mentions-option>
+            <a-mentions-option value="myj">
+              myj
+            </a-mentions-option>
+          </a-mentions>
+          <a-button type="primary" class="mentions-btn">
+            <icon-font type="icon-send" />
+          </a-button>
+        </div>
       </a-drawer>
-      <div class="mentions-box">
-        <a-mentions
-          class="mentions"
-          v-model="value"
-          @change="onChange"
-          @select="onSelect"
-        >
-          <a-mentions-option value="admin">
-            admin
-          </a-mentions-option>
-          <a-mentions-option value="user">
-            user
-          </a-mentions-option>
-          <a-mentions-option value="myj">
-            myj
-          </a-mentions-option>
-        </a-mentions>
-        <a-button type="primary" class="mentions-btn">
-          <icon-font type="icon-send" />
-        </a-button>
-      </div>
     </a-drawer>
   </div>
 </template>
@@ -135,6 +213,28 @@ import router from "@/router/index";
 import Mock from "mockjs";
 const Random = Mock.Random;
 const mockArrLength = Random.integer(1, 10);
+const noticesData = [
+  {
+    projectName: "开发流程",
+    noticesDes: "@管理员 此功能预计什么时候可以完成？",
+    dataTime: "2020-02-03 14:09:34"
+  },
+  {
+    projectName: "测试流程",
+    noticesDes: "@管理员 此功能现在的进度如何？",
+    dataTime: "2020-02-03 08:00:59"
+  },
+  {
+    projectName: "采购流程",
+    noticesDes: "@管理员 多抽些时间完成相关基础功能吧",
+    dataTime: "2020-02-04 16:29:34"
+  },
+  {
+    projectName: "普通流程",
+    noticesDes: "@管理员 不要让我催你了，重要的事情不要让我重复。",
+    dataTime: "2020-02-04 14:09:34"
+  }
+];
 export default {
   data() {
     const data = [];
@@ -144,7 +244,8 @@ export default {
       visibleDrawer: false,
       newsVisible: false,
       value: "",
-      data
+      data,
+      noticesData
     };
   },
   created() {
@@ -307,12 +408,67 @@ export default {
 }
 
 .tabs-news {
-  width: 260px;
-  max-width: 260px;
+  width: 300px;
+  max-width: 300px;
+  /deep/.ant-list-items {
+    max-height: 400px;
+    overflow: auto;
+  }
+  /deep/.ant-list-footer {
+    padding: 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .footer-btn {
+    color: #333333;
+  }
+  /deep/.ant-list-item {
+    cursor: context-menu;
+    padding: 8px 0;
+    &:last-child {
+      border-bottom: 0 !important;
+    }
+    .ant-list-item-meta {
+      align-items: center;
+      &:hover {
+        background-color: #e6f7ff;
+        cursor: pointer;
+      }
+    }
+    .ant-list-item-meta-avatar {
+      margin-left: 16px;
+    }
+    .ant-list-item-meta-content {
+      flex: auto;
+      white-space: normal;
+      padding-right: 12px;
+      .ant-list-item-meta-description {
+        font-size: 12px;
+      }
+    }
+  }
+  /deep/.ant-tabs-nav-wrap {
+    text-align: center;
+  }
+  .item-meta {
+    font-size: 14px;
+    color: #333333;
+    font-weight: 500;
+  }
+  .description {
+    font-size: 12px;
+    color: #999;
+    line-height: 20px;
+  }
 }
 
 .menu-tabs > .ant-dropdown-menu-item:hover {
   background-color: transparent;
+}
+.menu-tabs {
+  padding: 0;
+  .ant-dropdown-menu-item {
+    padding: 0;
+  }
 }
 
 /deep/.ant-drawer-content {
@@ -321,11 +477,11 @@ export default {
   }
   .ant-drawer-body {
     padding: 8px;
-    height: calc(100vh - 108px);
+    height: calc(100vh - 54px);
     overflow: auto;
   }
   .ant-list-item-meta {
-    align-items: end;
+    align-items: normal;
     flex-flow: column-reverse;
     .ant-list-item-meta-avatar {
       margin-top: 8px;
@@ -347,9 +503,19 @@ export default {
     }
   }
 }
+.drawer-chart {
+  /deep/.ant-list-item:hover {
+    background-color: #e6f7ff;
+    cursor: pointer;
+  }
+}
+
 .sub {
   color: #999;
   font-weight: normal;
   font-size: 12px;
+}
+/deep/.ant-tabs-bar {
+  margin: 0;
 }
 </style>
