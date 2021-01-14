@@ -15,11 +15,11 @@
         <a-icon type="down" />
       </a>
       <a-menu slot="overlay">
-        <a-menu-item key="1">
+        <a-menu-item key="1" @click="handleAccountClick">
           <a-icon type="user" />
           个人中心
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="2" @click="handleModifyClick">
           <a-icon type="key" />
           修改密码
         </a-menu-item>
@@ -325,6 +325,16 @@ export default {
         },
         onCancel() {}
       });
+    },
+    handleModifyClick() {
+      this.visible = false;
+      if (this.$route.path == "/modifyInfo") return;
+      this.$router.push({ path: "/modifyInfo" });
+    },
+    handleAccountClick() {
+      this.visible = false;
+      if (this.$route.path == "/accountInfo") return;
+      this.$router.push({ path: "/accountInfo" });
     }
   }
 };

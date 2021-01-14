@@ -25,14 +25,19 @@ export default {
   data() {
     this.selectKeysMap = {};
     const menuData = this.getMenuData(this.$router.options.routes);
+    const defaultKeys = this.selectKeysMap[this.$route.path]
+      ? this.selectKeysMap[this.$route.path]
+      : this.selectKeysMap["/home"];
     return {
       menuData,
-      selectKeys: this.selectKeysMap[this.$route.path]
+      selectKeys: defaultKeys
     };
   },
   watch: {
     $route(to) {
-      this.selectKeys = this.selectKeysMap[to.path];
+      if (this.selectKeysMap[to.path]) {
+        this.selectKeys = this.selectKeysMap[to.path];
+      }
     }
   },
   methods: {

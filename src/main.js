@@ -37,7 +37,8 @@ import {
   Table,
   Tooltip,
   Tag,
-  Upload
+  Upload,
+  Descriptions
 } from "ant-design-vue";
 
 Vue.prototype.$message = Message;
@@ -77,6 +78,7 @@ Vue.use(Table);
 Vue.use(Tag);
 Vue.use(Tooltip);
 Vue.use(Upload);
+Vue.use(Descriptions);
 Vue.config.productionTip = false;
 
 // 引入阿里iconfont图标库中的图标

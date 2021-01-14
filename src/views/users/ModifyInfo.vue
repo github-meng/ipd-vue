@@ -13,12 +13,13 @@
     <a-form :form="form" @submit="handleSubmit" class="modify-form">
       <a-form-item v-bind="formItemLayout" label="用户名">
         <a-input
+          disabled
           v-decorator="[
             'username',
             {
               rules: [
                 {
-                  required: true,
+                  required: false,
                   message: '请输入用户名!',
                   whitespace: true
                 }
@@ -87,6 +88,7 @@
       </a-form-item>
       <a-form-item v-bind="formItemLayout" label="邮箱">
         <a-input
+          disabled
           v-decorator="[
             'email',
             {
@@ -96,7 +98,7 @@
                   message: '邮箱格式不正确!'
                 },
                 {
-                  required: true,
+                  required: false,
                   message: '请输入邮箱!'
                 }
               ]
@@ -106,10 +108,11 @@
       </a-form-item>
       <a-form-item v-bind="formItemLayout" label="电话">
         <a-input
+          disabled
           v-decorator="[
             'phone',
             {
-              rules: [{ required: true, message: '请输入电话号码!' }]
+              rules: [{ required: false, message: '请输入电话号码!' }]
             }
           ]"
           style="width: 100%"
@@ -132,7 +135,7 @@
         <a-button type="primary" html-type="submit" class="mr-1">
           确认修改
         </a-button>
-        <a-button html-type="submit">
+        <a-button @click="resetForm">
           重置
         </a-button>
       </a-form-item>
@@ -193,6 +196,13 @@ export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: "register" });
   },
+  mounted() {
+    this.form.setFieldsValue({
+      username: this.username,
+      phone: this.phone,
+      email: this.email
+    });
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();
@@ -231,6 +241,14 @@ export default {
         );
       }
       this.autoCompleteResult = autoCompleteResult;
+    },
+    resetForm() {
+      this.confirmDirty = false;
+      this.form.setFieldsValue({
+        oldpassword: "",
+        password: "",
+        confirm: ""
+      });
     }
   }
 };
@@ -240,7 +258,7 @@ export default {
 .ipd-modify {
   background-color: #ffffff;
   border-radius: 2px;
-  height: calc(100vh - 86px);
+  height: calc(100vh - 80px);
   overflow: auto;
   padding: 24px;
 }
@@ -251,6 +269,7 @@ export default {
 .modify-avatar {
   width: 100px;
   height: 100px;
+  border: 1px solid #999;
 }
 .modify-form {
   width: 50%;

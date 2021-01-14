@@ -45,6 +45,7 @@ const routes = [
         path: "/",
         redirect: "/home"
       },
+      // 修改密码
       {
         path: "/modifyInfo",
         meta: {
@@ -54,6 +55,18 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "modifyInfo" */ "../views/users/ModifyInfo.vue"
+          )
+      },
+      // 个人中心
+      {
+        path: "/accountInfo",
+        meta: {
+          needLogin: true,
+          authority: ["admin", "ordinary"]
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "accountInfo" */ "../views/users/AccountInfo.vue"
           )
       },
       // home

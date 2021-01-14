@@ -113,19 +113,6 @@ export default {
       }
     };
   },
-  //   computed: {
-  //     player() {
-  //       if (this.dataToPreview.docType == "video") {
-  //         return this.$refs.videoPlayer.player;
-  //       }
-  //       return null;
-  //     }
-  //   },
-  watch: {
-    dataToPreview(e) {
-      console.log(e);
-    }
-  },
   mounted() {
     // setTimeout(() => {
     if (this.dataToPreview.docType == "video") {
