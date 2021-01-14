@@ -4,9 +4,11 @@
       :title="ModalData.pTitle"
       :width="'75%'"
       :bodyStyle="{ height: '480px', overflow: 'auto' }"
-      :dialog-style="{ top: '60px', padding: 0 }"
+      :dialog-style="{ padding: 0 }"
       :visible="visible"
       :maskClosable="false"
+      :destroyOnClose="true"
+      :centered="true"
       :confirm-loading="confirmLoading"
       cancelText="取消"
       okText="提交"
@@ -51,13 +53,14 @@
                 {{ inItem.docClassify }}
               </a-col>
               <a-col flex="auto">
-                <a-icon
+                <!-- <a-icon
                   :type="inItem.fileIcon"
                   :style="{
                     fontSize: '14px',
                     color: inItem.fileColor
                   }"
-                />
+                /> -->
+                <icon-font :type="inItem.fileIcon" />
                 {{ inItem.docName }}
               </a-col>
               <a-col flex="100px" class="hidden-col">
@@ -74,7 +77,11 @@
                   <template slot="title">
                     <span>预览</span>
                   </template>
-                  <a-button type="link" size="small">
+                  <a-button
+                    type="link"
+                    size="small"
+                    @click="previewFile(inItem)"
+                  >
                     <icon-font type="icon-search" style="color: orange;" />
                   </a-button>
                 </a-tooltip>
@@ -172,24 +179,35 @@
         </a-card>
       </div>
     </a-modal>
+    <div v-if="nextVisible">
+      <preview-modal
+        ref="previewModalRef"
+        :data-to-preview="dataToPreview"
+        v-on:func="childByValue"
+      />
+    </div>
   </div>
 </template>
 <script>
 import { getPanelDetailLists } from "@/api/apis";
+import PreviewModal from "./PreviewFile";
 export default {
   name: "panelModal",
   props: ["dataToChild"],
+  components: { PreviewModal },
   data() {
     return {
       ModalData: new Object(),
       visible: false,
+      nextVisible: false,
       confirmLoading: false,
       cardLoading: true,
       headStyle: { minHeight: "40px", padding: "0 8px", borderBottom: 0 },
       cardGridData: [],
       inDocListData: [],
       outDocListData: [],
-      fileList: []
+      fileList: [],
+      dataToPreview: new Object()
     };
   },
   watch: {
@@ -252,6 +270,20 @@ export default {
       } else if (status === "error") {
         this.$message.error(`${info.file.name} file upload failed.`);
       }
+    },
+    previewFile(doc) {
+      // if (doc.docType == "video") {
+      this.nextVisible = true;
+      this.dataToPreview = doc;
+      // 延时加载子弹窗
+      setTimeout(() => {
+        this.$refs.previewModalRef.showPreviewModal();
+      }, 100);
+      // }
+    },
+    childByValue(childValue) {
+      // 子弹窗组件传回来的值,销毁子弹窗
+      this.nextVisible = childValue;
     }
   }
 };

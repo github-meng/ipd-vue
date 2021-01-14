@@ -262,6 +262,7 @@ const getParentKey = (key, tree) => {
   return parentKey;
 };
 export default {
+  name: "home",
   components: { PanelModal },
   data() {
     return {

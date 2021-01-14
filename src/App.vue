@@ -11,6 +11,9 @@
 .mb-1 {
   margin-bottom: 8px;
 }
+.mr-1 {
+  margin-right: 8px;
+}
 .pt-5 {
   padding-top: 5px;
 }

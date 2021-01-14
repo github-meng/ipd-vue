@@ -56,24 +56,39 @@
         ],
         "inDocLists": [{
                 "id": 110,
+                "docType": "doc",
+                "docUrl": "",
                 "docName": "XXX项目需求规划书-模板.doc",
                 "docClassify": "需求规划书",
-                "fileIcon": "file-word",
+                "fileIcon": "icon-word",
                 "fileColor": "#55a0ff"
             },
             {
                 "id": 111,
+                "docType": "xls",
+                "docUrl": "",
                 "docName": "XXX项目评审报告-模板.xls",
                 "docClassify": "规格评审报告",
-                "fileIcon": "file-excel",
+                "fileIcon": "icon-excel",
                 "fileColor": "#5bcb9a"
             },
             {
                 "id": 112,
+                "docType": "txt",
+                "docUrl": "",
                 "docName": "XXX项目说明文本-模板.txt",
                 "docClassify": "阶段评估报告",
-                "fileIcon": "file-text",
+                "fileIcon": "icon-txt",
                 "fileColor": "#515151"
+            },
+            {
+                "id": 113,
+                "docType": "video",
+                "docUrl": "https://xianyujc.com/video/DA0B09A4A2B4B1D8FA4B576CEB24AEE9.mp4",
+                "docName": "XXX项目操作教程-模板.mp4",
+                "docClassify": "项目操作教程",
+                "fileIcon": "icon-video",
+                "fileColor": "#f734a7"
             }
         ],
         "outDocLists": [{

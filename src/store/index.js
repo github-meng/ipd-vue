@@ -97,6 +97,15 @@ const getters = {
   getterUserName: state => {
     return state.username;
   },
+  getterPassWord: state => {
+    return state.password;
+  },
+  getterUserPhone: state => {
+    return state.phone;
+  },
+  getterUserEmail: state => {
+    return state.email;
+  },
   getterUserImage: state => {
     return state.userimage;
   }

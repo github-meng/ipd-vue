@@ -45,6 +45,17 @@ const routes = [
         path: "/",
         redirect: "/home"
       },
+      {
+        path: "/modifyInfo",
+        meta: {
+          needLogin: true,
+          authority: ["admin", "ordinary"]
+        },
+        component: () =>
+          import(
+            /* webpackChunkName: "modifyInfo" */ "../views/users/ModifyInfo.vue"
+          )
+      },
       // home
       {
         path: "/home",
